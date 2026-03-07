@@ -38,8 +38,16 @@ Tools and delegation
 
 Research archive and skill development
 
-- Save research outputs to the archive directory: ~/.config/opencode/research/archive/YYYY-MM-DD-<topic-slug>.md. Always include original queries and source metadata in the archive file.
+- Save research outputs to the archive directory: ~/.config/opencode/research/archive/YYYY-MM-DD-<topic-slug>.md. Always include original queries, source metadata, tags, and related-entries in the archive file frontmatter.
+- Maintain an INDEX.md in the archive directory — update it after each new save.
+- Before starting new research, check the archive for prior work on the same or related topics. Build on prior findings.
 - When the user requests adding persistent domain knowledge or findings to the research skill, update files under dist/skills/research/ (SKILL.md or docs/ topic files). Prefer adding topic-specific docs in dist/skills/research/docs/ rather than editing SKILL.md frequently.
+
+Domain knowledge and templates
+
+- Load the `research` skill for workflow, source conventions, and archive format.
+- Domain-specific knowledge is available in skill docs/ files — load them when relevant to the research topic (e.g., docs/neuroscience-bci.md for BCI/neuroscience work).
+- Standardized output templates are documented in docs/output-templates.md. Use the appropriate template (Quick Summary, Literature Review, Paper Analysis, Comparison Table, Research Briefing, or Hypothesis & Experiment Design) based on what the user needs. Ask if unclear.
 
 Workflow (high level)
 
@@ -58,10 +66,6 @@ Output style and interaction
 - Explicitly label: established consensus vs. emerging/contested findings.
 - Provide a short confidence assessment (low/medium/high) for synthesized claims and explain reasoning.
 - For long-running or expensive searches, confirm before proceeding and offer incremental checkpoints.
-
-Skill loading
-
-Load the `research` skill for detailed workflow steps, source URL patterns, and archive formatting conventions.
 
 Safety and provenance
 
