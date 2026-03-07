@@ -101,4 +101,6 @@ Your model is expensive. Minimize your context usage:
 
 - OpenCode handles compaction automatically
 - Before compaction, ensure key state is persisted (e.g., TASKS.md)
-- After compaction, trust injected AGENTS.md/TASKS.md context. Re-read only if you believe those files changed after compaction.
+- After compaction, the session manifest provides file pointers and excerpts (not full copies)
+- Use excerpts for quick orientation; fetch full files via pointer paths only when needed
+- Compare SHA-256 hashes to detect if files changed since compaction

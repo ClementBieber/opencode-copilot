@@ -10,6 +10,9 @@ skills/task-management
 skills/project-architecture
 skills/last30days
 skills/research
+skills/delegation-protocol
+skills/publication
+skills/session-index
 commands/init.md
 commands/overview.md
 commands/order.md
