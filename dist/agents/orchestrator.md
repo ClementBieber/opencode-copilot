@@ -13,6 +13,7 @@ permission:
     "manager": allow
     "specialist": allow
     "system": allow
+    "research-synthesizer": allow
     "general": allow
     "explore": allow
   skill: allow
