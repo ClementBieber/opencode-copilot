@@ -1,10 +1,8 @@
-Autonomous Loops — Patterns and Templates
-========================================
+# Autonomous Loops — Patterns and Templates
 
 This document is a focused, tool-agnostic reference for designing safe autonomous loops. It includes concise pseudocode and operational guidance.
 
-1) Sequential pipeline
------------------------
+## 1) Sequential pipeline
 When to use: deterministic one-pass workflows where each stage depends on the previous.
 
 Pseudocode:
@@ -16,8 +14,7 @@ Pseudocode:
 
 Guidance: make stages idempotent when possible and log inputs/outputs for traceability.
 
-2) Autonomous iteration (run → verify → decide)
-----------------------------------------------
+## 2) Autonomous iteration (run → verify → decide)
 When to use: problems that benefit from repeated refinement or self-correction.
 
 Core loop pseudocode:
@@ -40,8 +37,7 @@ Core loop pseudocode:
 
 Notes: keep verification lightweight; always persist transcripts and checkpoints before risky actions.
 
-3) Continuous PR loop
-----------------------
+## 3) Continuous PR loop
 When to use: automated changes to repositories where CI is the primary verification signal.
 
 Workflow pseudocode:
@@ -64,8 +60,7 @@ Workflow pseudocode:
 
 Guidance: isolate each attempt in a separate worktree; cap concurrent open PRs and attempts.
 
-4) DAG orchestration
----------------------
+## 4) DAG orchestration
 When to use: problems that decompose into independent or partially-dependent subtasks suitable for parallel execution.
 
 Pattern:
@@ -81,20 +76,17 @@ Pattern:
 
 Conflict handling: prefer deterministic merges and retries; escalate to human review for irreconcilable conflicts.
 
-5) Shared state patterns
-------------------------
+## 5) Shared state patterns
 SHARED_NOTES.md: append concise entries like "TS — iter — summary — decision" for human-readable audit trails.
 
 Checkpoint files: store minimal machine-readable state (iteration, last-success-digest, artifact pointers). Always atomically write checkpoints before risky operations.
 
 Session transcripts: keep full IO per iteration for debugging; rotate or truncate archives to control growth.
 
-6) Worktree isolation
----------------------
+## 6) Worktree isolation
 Use separate workspaces for parallel branches/experiments to avoid contamination and accidental merges. Export artifacts or create PRs from isolated worktrees.
 
-7) Safety checklist (mandatory)
-------------------------------
+## 7) Safety checklist (mandatory)
 - Define hard exit conditions: MAX_ITERATIONS, MAX_COST, MAX_DURATION, MAX_CONSECUTIVE_FAILURES
 - Define completion criteria and verification gates per loop
 - Persist notes, transcripts, and checkpoints each iteration

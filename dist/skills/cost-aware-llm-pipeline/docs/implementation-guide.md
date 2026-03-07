@@ -1,10 +1,8 @@
-Cost-aware LLM pipeline — implementation guide
-=============================================
+# Cost-aware LLM pipeline — implementation guide
 
 This document provides a provider-agnostic reference for implementing a cost-aware LLM pipeline. Examples use pseudocode and illustrative configs.
 
-Model routing implementation
----------------------------
+## Model routing implementation
 
 Pseudocode: route_model(task)
 
@@ -29,8 +27,7 @@ function route_model(task):
   if complexity == HIGH:
     return {tier: 'capable', model_hint: 'large', estimated_cost: high}
 
-Cost tracker implementation
----------------------------
+## Cost tracker implementation
 
 Pseudocode: immutable CostRecord and CostTracker
 
@@ -55,8 +52,7 @@ function aggregate(tracker, by):
   # returns sums/counts grouped by `by` (e.g., per-task, per-session)
   return grouped_aggregates
 
-Pipeline composition
---------------------
+## Pipeline composition
 
 Pseudocode for end-to-end call
 
@@ -86,8 +82,7 @@ function call_pipeline(task, tracker, config):
   record_call(tracker, record)
   return response
 
-Retry wrapper
--------------
+## Retry wrapper
 
 Pseudocode: call_with_retry(model, prompt, retry_config)
 
@@ -104,8 +99,7 @@ function call_with_retry(model, prompt, retry_config):
     except non_transient_error as e:
       raise e
 
-Config template
----------------
+## Config template
 
 Example YAML-like configuration (illustrative):
 
@@ -135,8 +129,7 @@ prompt_cache:
   max_entries: 500
   invalidate_on_change: true
 
-Provider mapping
-----------------
+## Provider mapping
 
 This section maps conceptual pieces to common provider features (illustrative, not exhaustive).
 
@@ -149,12 +142,10 @@ Examples (conceptual):
 - Anthropic: map Claude model family similarly; use returned token counts if available.
 - Generic: if provider returns no cost, use cost_per_token_estimate * tokens as estimated_cost and mark actual_cost null.
 
-Notes and tips
--------------
+## Notes and tips
 - Keep routing rules interpretable and easy to override.
 - Record both estimates and provider-reported usage when available so you can reconcile differences.
 - Make prompt caches addressable by checksum or id to avoid resending large static prompts.
 
-Further reading
----------------
+## Further reading
 - See SKILL.md in the same directory for the concise guidance and best-practices checklist.

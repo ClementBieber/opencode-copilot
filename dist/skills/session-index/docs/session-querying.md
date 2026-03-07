@@ -23,27 +23,23 @@ Recommendations for making compacted sessions discoverable and queryable. This i
 3. **Find sessions on a specific branch** — filter by git.branch
 4. **Resume where I left off** — get the latest session, read its summary and manifest
 
-## Storage Options
+## Native Session Storage
 
-### Option A: Platform-level (preferred)
-If OpenCode exposes a sessions metadata API, store the manifest under a reserved key (`session_index_v1`) in the platform's session store. This enables cross-project querying and is managed by the platform.
+OpenCode stores all session data in a SQLite database at `~/.local/share/opencode/opencode.db`. The schema includes projects, sessions, messages, and parts tables with full message content stored as typed JSON blobs (`UserMessage | AssistantMessage`).
 
-### Option B: Project-local index
-Write session manifests to `.opencode/session-index/`:
-```
-.opencode/session-index/
-├── index.json          # Array of summary records (id, timestamp, summary)
-└── <session-id>.json   # Full manifest per session
-```
+Key characteristics:
+- **Project-scoped listing**: The TUI session list (`Ctrl+X L`) filters by current `project_id` — this is hardcoded, not configurable. Sessions from other projects are invisible.
+- **Cross-project API**: `GET /experimental/session` returns `GlobalSession` type across all projects, but the TUI does not use it.
+- **Cost/token tracking**: Every `AssistantMessage` records cost, tokens (input/output/reasoning/cache), modelID, and providerID natively.
 
-Query with standard tools:
-```bash
-# Find sessions mentioning a task
-jq '.[] | select(.summary | test("session-index"))' .opencode/session-index/index.json
-```
+### Storage approach
 
-### Option C: Embedded only (current)
-Manifest is embedded in compacted context. No persistent index. Sessions are discoverable only within the active OpenCode session store.
+Since OpenCode already persists full session data, avoid duplicating it. The compaction manifest (embedded in compacted context) provides the discovery layer on top:
+
+- **Embedded manifest (current)**: Manifest is included in compacted context with file pointers, SHA-256 hashes, and excerpts. Discoverable within the active session.
+- **Platform-level (future)**: If OpenCode exposes a sessions metadata API, store the manifest under a reserved key (`session_index_v1`) for cross-project querying.
+
+A project-local file index is unnecessary — the native SQLite DB already provides persistent, queryable session storage.
 
 ## Best Practices
 

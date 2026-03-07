@@ -1,6 +1,6 @@
 # Active Tasks & Work Items
 
-Last Updated: 2026-03-07
+Last Updated: 2026-03-08
 
 ---
 
@@ -65,12 +65,18 @@ Last Updated: 2026-03-07
   - autonomous-loops (loop patterns, exit conditions, state persistence, safety)
   - continuous-learning (session pattern extraction, confidence model, privacy, curation)
 - ✅ Full profile now at 27 deployed items (10 agents, 12 skills, 4 commands, 1 plugin)
+- ✅ Three ECC skill updates for OpenCode integration:
+  - session-querying.md: removed redundant Option B, acknowledged native SQLite DB at ~/.local/share/opencode/opencode.db
+  - continuous-learning implementation-guide: added OpenCode session DB as data source (schema, hook points, query pipeline)
+  - cost-aware-llm-pipeline SKILL.md: added request-based billing model acknowledgment (GitHub Copilot)
+- ✅ Fixed markdown formatting in all 6 ECC skill files (underline-style headers → ATX ## style)
 
 ## In Progress
 
-- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 7 commits pending)
+- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 9+ commits pending)
 
 ## Backlog
 
+- Update README.md profile counts (currently stale — says 12/17, should reflect 27 items)
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)
