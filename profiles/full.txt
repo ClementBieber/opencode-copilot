@@ -3,11 +3,13 @@ agents/manager.md
 agents/specialist.md
 agents/system.md
 agents/research-synthesizer.md
+agents/researcher.md
 skills/opencode-integration
 skills/development
 skills/task-management
 skills/project-architecture
 skills/last30days
+skills/research
 commands/init.md
 commands/overview.md
 commands/order.md
