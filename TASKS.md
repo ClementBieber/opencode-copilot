@@ -60,6 +60,11 @@ Last Updated: 2026-03-07
   - AGENTS.md line-count conflict resolved (standardized to 25 lines)
   - Compaction plugin recovery text slimmed (session-index docs = canonical)
 - ✅ Full profile now at 24 deployed items (10 agents, 9 skills, 4 commands, 1 plugin)
+- ✅ ECC skill extraction completed — 3 new skills created and deployed:
+  - cost-aware-llm-pipeline (model routing, cost tracking, budget controls, prompt caching, retry policy)
+  - autonomous-loops (loop patterns, exit conditions, state persistence, safety)
+  - continuous-learning (session pattern extraction, confidence model, privacy, curation)
+- ✅ Full profile now at 27 deployed items (10 agents, 12 skills, 4 commands, 1 plugin)
 
 ## In Progress
 
@@ -67,6 +72,5 @@ Last Updated: 2026-03-07
 
 ## Backlog
 
-- Selective ECC skill extraction (autonomous loops, continuous learning, cost-aware pipeline)
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)

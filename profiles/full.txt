@@ -17,6 +17,9 @@ skills/research
 skills/delegation-protocol
 skills/publication
 skills/session-index
+skills/cost-aware-llm-pipeline
+skills/autonomous-loops
+skills/continuous-learning
 commands/init.md
 commands/overview.md
 commands/order.md
