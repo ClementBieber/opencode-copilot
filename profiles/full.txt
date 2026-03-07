@@ -4,6 +4,8 @@ agents/specialist.md
 agents/system.md
 agents/research-synthesizer.md
 agents/researcher.md
+agents/explore.md
+agents/general.md
 skills/opencode-integration
 skills/development
 skills/task-management

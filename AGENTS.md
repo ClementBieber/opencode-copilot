@@ -8,7 +8,9 @@ Multi-agent orchestration system for OpenCode.
 Orchestrator (claude-opus-4.6, primary)
 ├── Manager (gpt-5-mini, subagent)
 ├── Specialist (gpt-5-mini, subagent)
-└── System (gpt-5-mini, subagent)
+├── System (gpt-5-mini, subagent)
+├── Explore (gpt-5-mini, built-in override)
+└── General (gpt-5-mini, built-in override)
 
 Researcher (gpt-5-mini, primary)
 ├── @specialist (delegation)

@@ -43,16 +43,24 @@ Last Updated: 2026-03-07
 - ✅ INSTRUCTIONS.md thinned to point at publication skill
 - ✅ Sessions system analyzed (ephemeral layer, pointer+excerpt model recommended)
 - ✅ everything-claude-code analyzed (extraction strategy documented, selective adoption recommended)
+- ✅ Session-index skill created + compaction plugin rewritten (pointer+excerpt model, SHA-256 hashing)
+- ✅ project-architecture skill fully generalized (removed all agent-system references)
+- ✅ architecture-spec.md fully rewritten (project-type-agnostic)
+- ✅ Created opencode-integration/docs/agent-system-architecture.md (generic agent design principles)
+- ✅ /overview command reordered (general analysis first, OpenCode config last)
+- ✅ PATH duplicates cleaned in ~/.bashrc
+- ✅ explore.md and general.md agents created (override built-in agents to use gpt-5-mini)
+- ✅ profiles/full.txt updated with explore.md and general.md
+- ✅ AGENTS.md architecture diagram updated with explore/general agents
 
 ## In Progress
 
-- 🔄 Push commits to GitHub (needs SSH)
+- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT)
 
 ## Backlog
 
 - Import legacy session archives into OpenCode DB (optional)
 - Formalize delegation protocol further (currently draft in skill docs)
-- Design and implement session-index skill / compaction pointer model
 - Selective ECC skill extraction (autonomous loops, continuous learning, cost-aware pipeline)
-- System operations: add openskills to PATH permanently, install pip3/pipx/gh, clean PATH duplicates, consolidate OpenCode runtime locations
+- System operations: install pip3/pipx/gh (needs sudo)
 - Track and remove remaining duplicated information across prompts, skills, docs, and root files
