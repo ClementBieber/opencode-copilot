@@ -4,6 +4,14 @@
 
 Replace full-file embedding in session compaction with pointers to canonical files plus short excerpts and metadata. Reduces context duplication while maintaining resume-ability.
 
+## Which Files Are Included
+
+Only **development state files** are included in compaction:
+- `AGENTS.md` — project architecture and agent overview
+- `TASKS.md` — active work items and backlog
+
+**Publication files** (README.md, INSTRUCTIONS.md) are NOT included. They describe the project to external users, not active development state. Including them wastes context tokens on content that rarely changes during a session.
+
 ## Pointer Entry Schema
 
 Each canonical file produces a pointer entry:

@@ -10,22 +10,17 @@ Generate a comprehensive overview of the current project by delegating to a spec
 Delegate to the specialist subagent with the following instructions:
 
 1. List the project root directory (`.`) to discover the file structure
-2. Read `AGENTS.md` or `README.md` if they exist, for project context
-3. Read `TASKS.md` if it exists, for current work state
-4. Look for agent configs in `.opencode/agents/` or `dist/agents/` — read each agent's frontmatter (description, model, mode)
-5. Look for skills in `.opencode/skills/` or `dist/skills/` — read each SKILL.md frontmatter (name, description)
-6. Look for commands in `.opencode/commands/` or `dist/commands/` — read each command's frontmatter
-7. Look for plugins in `.opencode/plugins/` or `dist/plugins/` — note each plugin
-8. Read `opencode.json` if it exists for project-level configuration
-9. Check for deployment scripts (`scripts/deploy.sh` or similar)
+2. Read `AGENTS.md` if it exists, for project context
+3. Read `README.md` or `package.json` / `pyproject.toml` / `Cargo.toml` for project description
+4. Read `TASKS.md` if it exists, for current work state
+5. Identify the tech stack from manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.)
+6. Look for test setup (test directories, test configs, CI files)
+7. Check for OpenCode configuration in `.opencode/` or `opencode.json` (if present)
 
 Present results as a structured overview covering (omit sections that don't apply):
-- **Project Summary** — what this project is, based on README/AGENTS or inferred from structure
-- **Architecture** — agent hierarchy and models (if agents found)
-- **Agents** — each agent's role, model, and mode
-- **Skills** — available skills and their purposes
-- **Commands** — available slash commands
-- **Plugins** — active plugins
-- **Configuration** — key settings from opencode.json
+- **Project Summary** — what this project is, based on AGENTS.md, README, or inferred from structure
+- **Tech Stack** — languages, frameworks, key dependencies
+- **File Structure** — key files and directories with their purposes
 - **Work State** — items from TASKS.md (if it exists)
-- **File Structure** — key files and directories
+- **Test & CI** — test framework, test directories, CI configuration
+- **OpenCode Config** — agents, skills, commands, plugins (only if `.opencode/` or `opencode.json` exists)

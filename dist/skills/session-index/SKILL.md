@@ -28,7 +28,8 @@ Instead of embedding full files, compaction produces:
 - Do NOT expect full AGENTS.md/TASKS.md content in the compacted context
 
 ### When the compaction plugin runs
-- Canonical files (AGENTS.md, TASKS.md, README.md, INSTRUCTIONS.md) get pointer+excerpt entries
+- Development files (AGENTS.md, TASKS.md) get pointer+excerpt entries
+- Publication files (README.md, INSTRUCTIONS.md) are NOT included — they don't track active development state
 - Excerpt policy: first 50 lines or 800 chars, whichever is smaller
 - Files smaller than the excerpt limit are included in full (still with pointer metadata)
 - Content hash (SHA-256) enables stale-detection on resumption

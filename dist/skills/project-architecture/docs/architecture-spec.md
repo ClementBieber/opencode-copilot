@@ -1,231 +1,155 @@
 # General Project Architecture Spec
 
-Status: draft  
-Scope: repository architecture only  
+Status: v2
+Scope: project organization for agent-assisted development
 Priority: authoritative design reference
 
 ## 1. Purpose
 
-This document defines strict architecture rules for projects that follow this multi-agent, skill-based design.
-
-Goals:
-- maximize context efficiency
-- eliminate duplicated instructions
-- provide reusable design rules for project organization
+This document defines architecture rules for organizing any software project so AI agents can work on it effectively. It is tool-agnostic and project-type-agnostic.
 
 ## 2. Core Principles
 
 ### 2.1 Unicity
 
-Every instruction, rule, or workflow must live in exactly one canonical place.
+Every instruction, rule, or piece of knowledge must live in exactly one canonical place.
 
-- agent prompts own behavior
-- skills own knowledge
-- skill docs own deep reference material
-- commands own invocation shortcuts
-- plugins own runtime behavior
-- AGENTS.md owns general project structure and project-specific overview
-- TASKS.md owns active work tracking
+Canonical locations:
+- Project documentation owns project context (AGENTS.md, README.md)
+- Work tracking owns task state (TASKS.md)
+- Code owns implementation details
+- Config files own configuration
+- Test files own test specifications
 
-If content appears in more than one place, architecture is wrong.
+If content appears in more than one place, architecture is wrong. Fix by choosing one canonical owner and having others reference it.
 
 ### 2.2 Context Minimization
 
-Always-loaded context must stay small.
+Always-loaded context must stay small:
+- Project documentation should be scannable, not exhaustive
+- Deep reference material should be discoverable, not preloaded
+- Prefer structured formats (tables, lists) over long prose
 
-- prompts should be short
-- skill metadata should be lightweight
-- full skill instructions load on demand
-- deep docs/examples/scripts load only when needed
+### 2.3 Discoverability
 
-### 2.3 Delegation First
+Agents need to find things quickly:
+- Use standard ecosystem conventions for project structure
+- Name files and directories clearly
+- Document non-obvious structures in AGENTS.md
+- Keep directory depth shallow where possible
 
-The primary model should orchestrate, not perform most heavy work.
+## 3. Project Files Ownership
 
-- Orchestrator delegates aggressively
-- Manager coordinates multi-step work
-- Specialist executes focused work
-- System handles environment/infrastructure work
+### 3.1 AGENTS.md
 
-## 3. Canonical Ownership
+Owns:
+- What the project is (one-line summary)
+- Project structure (key directories and their purposes)
+- Architecture decisions and constraints
+- Current focus areas
+- Technology stack highlights
 
-### 3.1 `dist/agents/*.md`
+Must NOT own:
+- Agent system configuration (models, tools, permissions)
+- Work tracking (that's TASKS.md)
+- Public-facing documentation (that's README.md)
+- Contributor/operator instructions (that's INSTRUCTIONS.md)
 
-Own:
-- role
-- behavior
-- delegation boundaries
-- allowed tools
-- loop/interaction contract
+Target: ≤30 lines. If it grows beyond this, content probably belongs elsewhere.
 
-Must not own:
-- domain workflows
-- reusable reference knowledge
-- repeated protocol text shared by multiple agents
+### 3.2 TASKS.md
 
-### 3.2 `dist/skills/<skill>/SKILL.md`
+Owns:
+- Active work items
+- Backlog
+- Completed items (for context)
 
-Own:
-- capability description
-- operational guidance
-- protocol rules used across contexts
-- invocation/usage guidance
-- concise, actionable instructions
+Must NOT own:
+- Architecture rules or governance policies
+- Design decisions (those belong in AGENTS.md or dedicated docs)
+- Duplication tracking (use a dedicated audit doc)
 
-### 3.3 `dist/skills/<skill>/docs/*`
+### 3.3 README.md
 
-Own:
-- long-form standards
-- examples
-- templates
-- advanced references
-- migration plans
+Owns:
+- Public-facing project description
+- Quick start / installation
+- Usage examples
+- Links to further documentation
 
-### 3.4 `dist/commands/*.md`
+Must NOT own:
+- Internal development context (that's AGENTS.md)
+- Work tracking (that's TASKS.md)
 
-Own only:
-- trigger phrase
-- intent
-- parameters
-- which skill/agent the command routes to
+### 3.4 INSTRUCTIONS.md
 
-Commands must not duplicate workflows.
+Owns (only for published projects):
+- Installation/deployment procedures
+- Contributor guidelines
+- Operator instructions
 
-### 3.5 `dist/plugins/*`
+Should not exist for private/internal projects unless needed.
 
-Own:
-- runtime hooks
-- context injection logic
-- session behavior
+## 4. Information Hygiene
 
-Plugins must not become knowledge stores.
+### 4.1 Shared knowledge rule
 
-### 3.6 Root files
+If the same information is needed in multiple places, extract it into one canonical location and reference it from others.
 
-`AGENTS.md`
-- general project overview, structure, and project-specific context
+### 4.2 Duplication tracking
 
-`README.md`
-- public entry point only
-
-`INSTRUCTIONS.md`
-- contributor/operator guidance only, and only for published projects
-
-`TASKS.md`
-- active work tracking only
-
-## 4. Skill System Standard
-
-### 4.1 Skill structure
-
-Each skill should follow this pattern:
-
-```text
-dist/skills/<skill>/
-├── SKILL.md
-├── docs/
-├── scripts/        # optional
-├── assets/         # optional
-└── tests/          # optional
-```
-
-### 4.2 Loading model
-
-Three levels of disclosure:
-
-1. metadata / name / description
-2. `SKILL.md`
-3. `docs/`, `scripts/`, `assets/`
-
-Only load the deepest level required.
-
-`SKILL.md` should stay as lean as possible. If content is exploratory, optional, or only relevant in a deeper branch of the skill tree, move it into `docs/` or a sub-skill instead of bloating the parent `SKILL.md`.
-
-### 4.3 Shared behavior rule
-
-If the same instructions are needed in more than one prompt, they must become a skill.
-
-Example:
-- delegation/blocked-state behavior belongs in `delegation-protocol`
-- not in three separate agent prompts
-
-### 4.4 Registry direction
-
-The long-term target is:
-- a thin central skill registry/index
-- agents reference skill ids only
-- skill details live only inside the target skill
-
-Avoid large parent skills that are always loaded.
-
-## 5. Agent Prompt Rules
-
-All agent prompts must follow these rules:
-
-1. short and behavioral
-2. no repeated shared standards
-3. no embedded skill catalogs beyond minimal routing references
-4. no long examples unless unique to that agent
-5. reference shared skills for shared behavior
-
-Prompt duplication across agents is a design bug.
-
-Agent-specific behavior standards belong in the corresponding agent prompt, not in this architecture skill.
-
-## 6. Review Rules
-
-Every architecture change should be reviewed against these questions:
-
-1. is anything duplicated?
-2. does this increase always-loaded context?
-3. could this be a skill instead of prompt text?
-4. could this be a command instead of a new agent?
-5. could this be repo-level instead of system-level?
-6. does it preserve Orchestrator loop behavior?
-7. does it preserve delegation clarity?
-
-If any answer is poor, redesign before merging.
-
-## 7. Duplication Tracking
-
-Duplicated information should be tracked explicitly whenever discovered.
+When duplicated information is discovered:
+1. Identify the canonical owner
+2. Record it in a tracking document
+3. Consolidate during the next relevant change
+4. Verify the duplicate is fully removed
 
 Track at least:
-- source file
-- duplicate file
-- canonical owner
-- proposed destination
-- cleanup status
+- Source file and duplicate file
+- Canonical owner
+- Cleanup status
 
-Duplication tracking should live in a dedicated cleanup or governance document, not in `TASKS.md`. Duplicates should never remain invisible.
+### 4.3 Review heuristic
 
-## 8. Immediate Remediation Targets
+Every documentation change should be reviewed against:
+1. Is anything duplicated across files?
+2. Does this increase the amount of always-loaded context?
+3. Is this in the right canonical location?
+4. Could this reference an existing doc instead of restating?
 
-Current priorities:
+## 5. Project Structure Conventions
 
-1. shrink root architecture docs
-2. reduce agent-local skill descriptions
-3. introduce thin skill registry/index
-4. normalize research-related prompt/skill boundaries
-5. track and remove discovered duplication systematically
+### 5.1 General patterns
 
-## 9. Non-Negotiable Rules
+- Group by feature/domain, not by file type (when the ecosystem allows it)
+- Keep tests near the code they test, or in a parallel directory structure
+- Use the ecosystem's standard tooling and configuration files
 
-- no duplicated instructions across agent prompts
-- no prompt-owned domain knowledge
-- no new tool without an architecture placement decision
-- no system mutation without an integration rationale
+### 5.2 Documentation structure
 
-## 10. Decision Heuristics
+For projects with significant documentation:
+```
+docs/
+├── architecture.md     # System design decisions
+├── api.md              # API documentation
+├── deployment.md       # Deployment procedures
+└── ...
+```
 
-Use this test:
+Keep top-level docs lean. Deep content goes in subdirectories.
 
-- repeated across agents? → skill
-- deep domain knowledge? → skill/docs
-- runtime hook? → plugin
-- user shortcut? → command
-- role/behavior policy? → agent prompt
-- general project structure/context? → AGENTS.md
-- active task tracking? → TASKS.md
+## 6. Decision Heuristics
 
-That is the default architectural sorting rule.
+When deciding where something belongs:
+
+| Question | Answer |
+|----------|--------|
+| Is it project context for agents? | → AGENTS.md |
+| Is it active work? | → TASKS.md |
+| Is it public-facing? | → README.md |
+| Is it for contributors/operators? | → INSTRUCTIONS.md |
+| Is it deep reference material? | → docs/ subdirectory |
+| Is it implementation detail? | → code + comments |
+| Is it configuration? | → appropriate config file |
+
+This is the default architectural sorting rule for project information.

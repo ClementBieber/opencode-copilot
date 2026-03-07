@@ -7,8 +7,9 @@ import type { Plugin } from "@opencode-ai/plugin"
 const EXCERPT_MAX_CHARS = 800
 const EXCERPT_MAX_LINES = 50
 
-// Canonical files to include in session manifest
-const CANONICAL_FILES = ["AGENTS.md", "TASKS.md", "README.md", "INSTRUCTIONS.md"]
+// Development files to include in session manifest
+// Only include files that track active project state, not publication files
+const CANONICAL_FILES = ["AGENTS.md", "TASKS.md"]
 
 interface PointerEntry {
   path: string

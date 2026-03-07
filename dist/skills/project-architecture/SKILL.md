@@ -1,58 +1,83 @@
 ---
 name: project-architecture
-description: "Agentic project architecture pattern: minimal project files, agent hierarchy, on-demand skills, dist/ deployment via symlinks."
+description: "General project organization guidelines for agent-assisted development: minimal project files, documentation practices, context efficiency, and information hygiene."
 license: MIT
 compatibility: ">=1.0.0"
 ---
 
 # Project Architecture Skill
 
-Reusable pattern for multi-agent projects that optimize for context efficiency, unicity, and strict ownership boundaries.
+Guidelines for organizing any software project so that AI agents can work on it effectively. These principles apply regardless of project type — web apps, APIs, libraries, CLI tools, or agent systems.
 
 ## Core Principle: Unicity
 
-Every piece of information exists in exactly one place:
-- **Agent prompts** define behavior (dist/agents/*.md)
-- **Skills** hold domain knowledge (dist/skills/*/SKILL.md) — loaded on-demand
-- **AGENTS.md** holds general project structure and project-specific overview
-- **TASKS.md** tracks work state
-- **README.md** is the public entry point
+Every piece of information exists in exactly one place. If the same content appears in multiple files, the architecture is wrong.
 
-Never duplicate information across files. Reference it instead.
+- Each concept has one canonical location
+- Other files reference it, never duplicate it
+- When information needs updating, there is exactly one place to change
 
-## Minimal Project Files
+## Project Files
 
-Only keep files that serve a distinct, non-redundant purpose:
+Only keep files that serve a distinct, non-redundant purpose.
 
-| File | Purpose |
-|------|---------|
-| `AGENTS.md` | General architecture overview, structure, and project-specific context |
-| `TASKS.md` | Active work items |
-| `README.md` | Public-facing project description and quick start |
-| `INSTRUCTIONS.md` | Published-project operator/contributor instructions only |
+### Development files (track active project state)
 
-All other knowledge lives in skills (loaded on-demand) or agent prompts (always loaded with that agent).
+| File | Purpose | When to create |
+|------|---------|----------------|
+| `AGENTS.md` | Project context for AI agents: what the project is, how it's structured, key areas, constraints | Always — created by `/init` |
+| `TASKS.md` | Active work items, backlog, completed work | When tracking multi-step or multi-session work |
 
-`INSTRUCTIONS.md` should only exist when the project is intended for publication or external consumption.
+### Publication files (describe the project to external users)
 
-## Agent Hierarchy Pattern
+| File | Purpose | When to create |
+|------|---------|----------------|
+| `README.md` | Public-facing project description and quick start | Standard for all repos |
+| `INSTRUCTIONS.md` | Contributor/operator instructions | Only for published projects |
 
-```
-Primary (expensive model) — orchestration, delegation, user interaction
-├── Manager (cheap model) — task decomposition, coordination
-├── Specialist (cheap model) — focused execution
-└── System (cheap model) — diagnostics, infrastructure
-```
+### What NOT to put in these files
 
-Design for context efficiency:
-- Primary agent delegates aggressively to minimize its own context usage
-- Subagents use cheaper models for all heavy lifting
-- Skills provide knowledge on-demand — not preloaded into every conversation
+- **AGENTS.md** should describe the *project*, not the *agent system*. No agent definitions, no model assignments, no tool configurations. Agents already know how to behave — they need to understand the project.
+- **TASKS.md** is for work tracking only. No architecture rules, no governance policies, no design decisions.
 
-Keep it minimal. Add files and skills only when they serve a clear, non-redundant purpose.
+## AGENTS.md Guidelines
+
+A good AGENTS.md answers these questions for an agent:
+1. What is this project? (one line)
+2. What's the structure? (key directories and their purposes)
+3. What are the current focus areas or constraints?
+4. What should I know before making changes?
+
+Keep it under 30 lines. See the `/init` command for the standard template.
+
+## Context Efficiency
+
+Agents have limited context windows. Help them by:
+
+- **Keeping docs scannable** — use headers, tables, and short paragraphs
+- **Avoiding redundancy** — if something is in code comments, don't repeat it in docs
+- **Preferring structured formats** — tables over prose, lists over paragraphs
+- **Loading details on demand** — keep top-level docs lean, put deep content in subdirectories
+
+## General File Organization
+
+Organize project files so agents can discover and navigate them:
+
+- Group related code by feature or domain, not by file type
+- Keep test files near the code they test (or in a parallel structure)
+- Use standard ecosystem conventions (package.json, pyproject.toml, Cargo.toml, etc.)
+- Document non-obvious directory purposes in AGENTS.md
+
+## Duplication Tracking
+
+When duplicated information is discovered across project files:
+
+1. Identify the canonical owner
+2. Track the duplication explicitly
+3. Consolidate during the next relevant change
+
+See `docs/duplication-audit.md` for a tracking template.
 
 ## Detailed Standards
 
-For the full general project architecture standard, see:
-
-- `docs/architecture-spec.md`
+For the full architecture guidelines, see `docs/architecture-spec.md`.

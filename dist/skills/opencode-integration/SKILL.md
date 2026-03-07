@@ -113,4 +113,5 @@ Many OpenCode setups use:
 For detailed documentation, see `docs/` in this skill directory:
 - `docs/config-reference.md` - Full opencode.json schema reference
 - `docs/model-providers.md` - Available providers and model IDs
+- `docs/agent-system-architecture.md` - Design principles for agents, skills, commands, and plugins
 - `docs/system-integration-governance.md` - Rules for integrating tools into the Linux/OpenCode environment
