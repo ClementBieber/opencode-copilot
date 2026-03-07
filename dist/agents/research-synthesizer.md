@@ -1,7 +1,7 @@
 ---
 description: Lightweight research synthesis agent. Analyzes and synthesizes web search results for the last30days skill.
 mode: subagent
-model: github-copilot/claude-haiku-4.5
+model: github-copilot/claude-opus-4.6
 temperature: 0.3
 color: "#9B59B6"
 permission:

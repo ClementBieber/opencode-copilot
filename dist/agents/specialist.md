@@ -1,7 +1,7 @@
 ---
 description: Focused execution subagent. Performs single-domain tasks like coding, configuration, research, and file operations. Load skills for domain-specific knowledge before executing.
 mode: subagent
-model: github-copilot/gpt-5-mini
+model: github-copilot/claude-opus-4.6
 temperature: 0.3
 color: "#2ECC71"
 permission:

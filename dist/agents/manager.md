@@ -1,7 +1,7 @@
 ---
 description: Coordination subagent. Decomposes complex tasks into subtasks, coordinates multi-domain work, and delegates focused execution to the Specialist.
 mode: subagent
-model: github-copilot/gpt-5-mini
+model: github-copilot/claude-opus-4.6
 temperature: 0.2
 color: "#7B68EE"
 permission:

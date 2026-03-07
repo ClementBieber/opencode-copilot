@@ -73,6 +73,7 @@ Last Updated: 2026-03-08
 
 ## In Progress
 
+- 🔄 Architecture change: all subagents on opus, orchestrator as thin router (feature/opus-subagents branch)
 - 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 9+ commits pending)
 
 ## Backlog

@@ -1,7 +1,7 @@
 ---
 description: System operations subagent. Diagnostics, configuration, session management, environment troubleshooting. Verifies understanding before acting.
 mode: subagent
-model: github-copilot/gpt-5-mini
+model: github-copilot/claude-opus-4.6
 temperature: 0.2
 color: "#E67E22"
 permission:
