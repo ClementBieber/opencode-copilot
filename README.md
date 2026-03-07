@@ -1,6 +1,6 @@
 # OpenCode Copilot
 
-Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. 4 agents coordinate development tasks through a delegation hierarchy, deployed globally and available in every project.
+Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. 5 agents coordinate development tasks through a delegation hierarchy, deployed globally and available in every project.
 
 ## Quick Start
 
@@ -15,7 +15,7 @@ git clone <repo-url>
 | Profile | Items | Description |
 |---------|-------|-------------|
 | `lite` (default) | 12 | Core agents, skills, commands, plugin |
-| `full` | 15 | Everything in lite + last30days research extras |
+| `full` | 17 | Everything in lite + last30days research extras |
 
 ```bash
 ./scripts/deploy.sh                # lite profile (default)
@@ -33,6 +33,7 @@ Deploy creates individual file/directory symlinks from `dist/` into `~/.config/o
 | Manager (subagent) | gpt-5-mini | Task decomposition, multi-domain coordination |
 | Specialist (subagent) | gpt-5-mini | Focused execution (code, config, research) |
 | System (subagent) | gpt-5-mini | Diagnostics, infrastructure, troubleshooting |
+| Researcher (primary) | gpt-5-mini | Science research, paper search, documentation, domain knowledge |
 
 ## Project Structure
 
@@ -56,6 +57,7 @@ TASKS.md                 # Active work items
 | development | Coding patterns, architecture, testing |
 | task-management | TASKS.md format and conventions |
 | project-architecture | Agentic project architecture pattern |
+| research | Science research workflow, source conventions, archive format |
 
 ## Commands
 

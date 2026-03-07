@@ -1,14 +1,18 @@
 # OpenCode Copilot
 
-Multi-agent orchestration system for OpenCode. 4 agents deployed as markdown configs via symlinks.
+Multi-agent orchestration system for OpenCode. 5 agents deployed as markdown configs via symlinks.
 
 ## Architecture
 
 ```
 Orchestrator (gpt-5.4, primary)
-├── Manager (gpt-5-mini, subagent) → decomposes tasks, coordinates
-├── Specialist (gpt-5-mini, subagent) → focused execution
-└── System (gpt-5-mini, subagent) → diagnostics, infrastructure
+├── Manager (gpt-5-mini, subagent)
+├── Specialist (gpt-5-mini, subagent)
+└── System (gpt-5-mini, subagent)
+
+Researcher (gpt-5-mini, primary)
+├── @specialist (delegation)
+└── @explore (delegation)
 ```
 
 ## Layout

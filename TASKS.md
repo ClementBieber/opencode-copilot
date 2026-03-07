@@ -25,12 +25,12 @@ Last Updated: 2026-03-07
 - ✅ Pushed initial commit to GitHub (ClementBieber/opencode-copilot)
 - ✅ Documentation updates for profile system (README.md, INSTRUCTIONS.md)
 - ✅ Last30days extras created (research-synthesizer agent, last30days skill, /last30 command)
-- ✅ Full profile deployed and verified (15/15 items)
+- ✅ Full profile deployed and verified (17/17 items)
+- ✅ Researcher primary agent created with BCI domain knowledge, output templates, and enhanced archive system
 
 ## In Progress
 
-- 🔄 Branch rename: local `main` exists, need to push and delete remote `master`
-- 🔄 Push latest commits to GitHub (2 commits ahead of remote)
+- 🔄 Push commits to GitHub (5 commits ahead of remote, needs SSH)
 
 ## Backlog
 
