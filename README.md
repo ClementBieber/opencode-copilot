@@ -17,7 +17,7 @@ For published-project installation and operator guidance, see `INSTRUCTIONS.md` 
 | Profile | Items | Description |
 |---------|-------|-------------|
 | `lite` (default) | 12 | Core agents, skills, commands, plugin |
-| `full` | 17 | Everything in lite + last30days research extras |
+| `full` | 23 | Everything in lite + research, delegation, publication extras |
 
 ```bash
 ./scripts/deploy.sh                # lite profile (default)
