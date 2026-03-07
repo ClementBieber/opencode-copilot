@@ -1,0 +1,29 @@
+# Session logs and archives
+logs/
+archive/
+
+# Editor/IDE config
+.obsidian/
+.vscode/
+.idea/
+
+# Secrets and credentials
+*.env
+.env
+.env.*
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Legacy/deprecated
+opencode-config/
+src/
+
+# Temporary files
+*.bak
+*.tmp
+/tmp/
