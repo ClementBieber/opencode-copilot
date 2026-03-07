@@ -48,7 +48,7 @@ A good AGENTS.md answers these questions for an agent:
 3. What are the current focus areas or constraints?
 4. What should I know before making changes?
 
-Keep it under 30 lines. See the `/init` command for the standard template.
+Keep it under 25 lines. See the `/init` command for the standard template.
 
 ## Context Efficiency
 

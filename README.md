@@ -52,6 +52,4 @@ Canonical command behavior lives in `dist/commands/*.md`.
 
 ## Design Principles
 
-- **Context efficiency** — Primary model orchestrates, gpt-5-mini executes. Skills load on-demand only.
-- **Unicity** — information exists in one place. Skills hold knowledge, agent prompts hold behavior.
-- **Delegation** — push heavy work to cheaper subagent models.
+See `dist/skills/project-architecture/SKILL.md` for canonical architecture principles (unicity, context efficiency, delegation).

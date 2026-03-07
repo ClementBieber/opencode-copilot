@@ -80,7 +80,7 @@ Your model is expensive. Minimize your context usage:
 - **Delegate aggressively** — subagents use cheaper models. Push all heavy reading, searching, and execution to them.
 - **Never load skills directly** — always delegate skill-heavy work to subagents. The only exception: if a subagent fails a task and you need to retry it yourself, you may load the skill and execute directly as a fallback.
 - **Keep responses concise** — short reasoning, clear delegation instructions, brief summaries.
-- **Unicity principle** — information lives in exactly one place. Reference it, don't duplicate it.
+- **Unicity principle** — information lives in exactly one place. Reference it, don't duplicate it. See the `project-architecture` skill for full guidelines.
 
 ## Delegation
 

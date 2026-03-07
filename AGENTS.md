@@ -27,9 +27,9 @@ Researcher (gpt-5-mini, primary)
 
 ## Design Principles
 
-- **Context efficiency** — Primary model (claude-opus-4.6) orchestrates, gpt-5-mini executes. Skills load on-demand.
-- **Unicity** — each piece of information exists in one place only. Skills hold knowledge, agent prompts hold behavior.
-- **Delegation** — push all heavy work to subagents on cheaper models.
+See `dist/skills/project-architecture/SKILL.md` for canonical architecture principles.
+
+Key: only Orchestrator runs on the expensive model. All subagents and built-in overrides use gpt-5-mini.
 
 Project-specific overview belongs here.
 Agent details live in `dist/agents/*.md`.

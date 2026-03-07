@@ -36,14 +36,7 @@ Keep the response compact and directly integrable.
 
 ## Blocked Result Format
 
-If blocked on missing user input, return exactly:
-
-- `Status: BLOCKED`
-- `Needed from user: <exact question>`
-- `Why needed: <one sentence>`
-- `Next step after answer: <one sentence>`
-
-Do not add extra commentary.
+If blocked on missing user input, return a structured blocked result. See `docs/delegation-spec.md` for the exact format.
 
 ## Noise Limits
 

@@ -164,12 +164,7 @@ export const CompactionPlugin: Plugin = async (ctx) => {
       // Recovery instructions (pointer-aware)
       sections.push(`## Post-Compaction Recovery
 
-Resume work using the manifest and excerpts above. Key principles:
-- Use file pointers to fetch canonical files when you need full content.
-- Validate content via SHA-256 hash. If mismatch, re-read from disk.
-- Use the excerpts for quick orientation before fetching full files.
-- Do NOT re-embed full file contents into future compaction outputs.
-- Delegate heavy work to subagents. Load skills on-demand only.`)
+Use the manifest and excerpts above to resume work. Fetch full files via pointer paths when needed. Validate via SHA-256 hash. Delegate heavy work to subagents.`)
 
       output.context.push(sections.join("\n\n"))
     },

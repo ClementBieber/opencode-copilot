@@ -10,8 +10,8 @@ description: Software development knowledge including coding patterns, architect
 1. **Native-first** — Use platform built-in features instead of custom code
 2. **Config as code** — Define behavior declaratively when possible
 3. **Separation of concerns** — Clear boundaries between orchestration, knowledge, and runtime
-4. **Context efficiency** — Minimize token usage. Expensive models orchestrate, cheap models execute.
-5. **Unicity** — Information exists in one place only. Reference, don't duplicate.
+
+For project-level architecture principles (unicity, context efficiency), see the `project-architecture` skill.
 
 ## Coding Standards
 
