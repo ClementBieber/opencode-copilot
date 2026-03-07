@@ -10,6 +10,8 @@ git clone <repo-url>
 # Open OpenCode in any project — agents are available immediately
 ```
 
+For published-project installation and operator guidance, see `INSTRUCTIONS.md` and `dist/skills/publication/docs/`.
+
 ## Deployment Profiles
 
 | Profile | Items | Description |

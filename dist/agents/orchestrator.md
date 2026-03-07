@@ -1,7 +1,7 @@
 ---
 description: Primary orchestration agent. Coordinates complex tasks by delegating to subagents. Operates in a continuous loop — always progresses work or asks questions via the TUI.
 mode: primary
-model: github-copilot/gpt-5.4
+model: github-copilot/claude-opus-4.6
 temperature: 0.2
 steps: 12
 color: "#4A90D9"
