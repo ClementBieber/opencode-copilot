@@ -40,22 +40,29 @@ npm install --prefix ~/.config/opencode
 ## Step 3: Deploy Configs via Symlinks
 
 ```bash
-./scripts/deploy.sh
+./scripts/deploy.sh                # deploys lite profile (default)
 ```
 
-This creates symlinks:
-- `~/.config/opencode/agents/` → `dist/agents/`
-- `~/.config/opencode/skills/` → `dist/skills/`
-- `~/.config/opencode/commands/` → `dist/commands/`
-- `~/.config/opencode/plugins/` → `dist/plugins/`
-
-**If deploy.sh reports errors** about existing non-empty directories, back them up first:
+For the full profile (includes last30days research extras):
 ```bash
-mv ~/.config/opencode/agents ~/.config/opencode/agents.bak
-# Repeat for any conflicting directory, then re-run deploy.sh
+./scripts/deploy.sh --profile full
 ```
 
-**Verify:** `ls -la ~/.config/opencode/` should show symlinks pointing to the project's `dist/` directory.
+This creates individual symlinks for each agent, skill, command, and plugin from `dist/` into `~/.config/opencode/`. A deployment record is stored at `~/.config/opencode/.opencode-copilot-deployed` for clean removal.
+
+**Available profiles:**
+| Profile | Contents |
+|---------|----------|
+| `lite` (default) | 4 agents, 4 skills, 3 commands, 1 plugin |
+| `full` | Everything in lite + research-synthesizer agent, last30days skill, last30 command |
+
+**If deploy.sh reports errors** about existing files or directories, back them up first:
+```bash
+mv ~/.config/opencode/agents/orchestrator.md ~/.config/opencode/agents/orchestrator.md.bak
+# Repeat for any conflicting file, then re-run deploy.sh
+```
+
+**Verify:** `ls -la ~/.config/opencode/agents/` should show symlinks pointing to the project's `dist/` directory.
 
 ## Step 4: Verify Deployment
 
@@ -78,19 +85,19 @@ Check that:
 | Issue | Solution |
 |-------|---------|
 | Plugin errors on startup | Run `npm install --prefix ~/.config/opencode` to ensure `@opencode-ai/plugin` is installed |
-| `deploy.sh` refuses to link | Back up existing dirs: `mv ~/.config/opencode/agents ~/.config/opencode/agents.bak` |
+| `deploy.sh` refuses to link | Back up existing files: `mv ~/.config/opencode/agents/orchestrator.md ~/.config/opencode/agents/orchestrator.md.bak` |
 | Agent not appearing | Restart OpenCode — agent prompt changes require a session restart |
 | Commands not recognized | Verify symlink: `ls -la ~/.config/opencode/commands/` should show the symlink |
 
 ## Uninstall
 
-To remove the symlinks without affecting OpenCode or other configs:
+To remove all deployed symlinks:
 
 ```bash
 ./scripts/undeploy.sh
 ```
 
-This only removes symlinks that point to this project's `dist/` directory. It never deletes real files.
+This reads the deployment record (`~/.config/opencode/.opencode-copilot-deployed`) to remove exactly what was deployed. It never deletes real files.
 
 ## File Structure Reference
 
@@ -101,9 +108,12 @@ opencode-copilot/
 │   ├── skills/              # 4 skill definitions
 │   ├── commands/            # 3 commands (/init, /overview, /order)
 │   └── plugins/             # Compaction plugin
+├── profiles/
+│   ├── lite.txt             # Default profile (core items)
+│   └── full.txt             # Full profile (core + extras)
 ├── scripts/
-│   ├── deploy.sh            # Creates symlinks
-│   └── undeploy.sh          # Removes symlinks
+│   ├── deploy.sh            # Creates per-item symlinks (--profile flag)
+│   └── undeploy.sh          # Removes deployed symlinks via record
 ├── AGENTS.md                # Project architecture overview
 ├── TASKS.md                 # Work tracking
 ├── INSTRUCTIONS.md          # This file

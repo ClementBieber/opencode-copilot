@@ -98,7 +98,7 @@ Later sources override earlier ones. Configs are **merged**, not replaced.
 
 | Agent | Mode | Model | Role |
 |-------|------|-------|------|
-| orchestrator | primary | claude-opus-4.6 | Coordination, delegation, user interaction |
+| orchestrator | primary | gpt-5.4 | Coordination, delegation, user interaction |
 | manager | subagent | gpt-5-mini | Task decomposition, multi-domain coordination |
 | specialist | subagent | gpt-5-mini | Focused execution, single-domain tasks |
 | system | subagent | gpt-5-mini | Diagnostics, infrastructure, troubleshooting |

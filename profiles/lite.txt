@@ -1,0 +1,12 @@
+agents/orchestrator.md
+agents/manager.md
+agents/specialist.md
+agents/system.md
+skills/opencode-integration
+skills/development
+skills/task-management
+skills/project-architecture
+commands/init.md
+commands/overview.md
+commands/order.md
+plugins/compaction.ts

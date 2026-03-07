@@ -5,7 +5,7 @@ Multi-agent orchestration system for OpenCode. 4 agents deployed as markdown con
 ## Architecture
 
 ```
-Orchestrator (claude-opus-4.6, primary)
+Orchestrator (gpt-5.4, primary)
 ├── Manager (gpt-5-mini, subagent) → decomposes tasks, coordinates
 ├── Specialist (gpt-5-mini, subagent) → focused execution
 └── System (gpt-5-mini, subagent) → diagnostics, infrastructure
@@ -19,7 +19,7 @@ Orchestrator (claude-opus-4.6, primary)
 
 ## Design Principles
 
-- **Context efficiency** — Opus orchestrates, gpt-5-mini executes. Skills load on-demand.
+- **Context efficiency** — Primary model orchestrates, gpt-5-mini executes. Skills load on-demand.
 - **Unicity** — each piece of information exists in one place only. Skills hold knowledge, agent prompts hold behavior.
 - **Delegation** — push all heavy work to subagents on cheaper models.
 

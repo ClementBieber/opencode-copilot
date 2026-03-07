@@ -11,20 +11,20 @@ In OpenCode configs, models use `provider/model-id` format.
 | anthropic | `anthropic/claude-sonnet-4-20250514` |
 | openai | `openai/gpt-5` |
 | google | `google/gemini-2.5-pro` |
-| github-copilot | `github-copilot/claude-opus-4.6` |
+| github-copilot | `github-copilot/gpt-5.4` |
 | opencode | `opencode/gpt-5.1-codex` (via Zen) |
 
 ## Our Agent Model Assignments
 
 | Agent | Model | Reasoning |
 |-------|-------|-----------|
-| orchestrator | `github-copilot/claude-opus-4.6` | Best reasoning for complex orchestration |
+| orchestrator | `github-copilot/gpt-5.4` | Best reasoning for complex orchestration |
 | manager | `github-copilot/gpt-5-mini` | Good coordination at lower cost |
 | specialist | `github-copilot/gpt-5-mini` | Good execution at lower cost |
 
 ## Model Selection Guidelines
 
-- **Orchestration/reasoning tasks:** Use the best available model (Claude Opus)
+- **Orchestration/reasoning tasks:** Use the best available model (e.g., GPT-5.4)
 - **Routine execution:** Use capable but cheaper models (GPT-5 mini)
 - **Read-only/exploration:** Default model is fine (inherits from parent)
 - Use `opencode models` command to see currently available models
