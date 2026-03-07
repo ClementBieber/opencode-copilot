@@ -7,15 +7,15 @@ compatibility: ">=1.0.0"
 
 # Project Architecture Skill
 
-Reusable pattern for multi-agent projects using OpenCode's native configuration.
+Reusable pattern for multi-agent projects that optimize for context efficiency, unicity, and strict ownership boundaries.
 
 ## Core Principle: Unicity
 
 Every piece of information exists in exactly one place:
 - **Agent prompts** define behavior (dist/agents/*.md)
 - **Skills** hold domain knowledge (dist/skills/*/SKILL.md) — loaded on-demand
+- **AGENTS.md** holds general project structure and project-specific overview
 - **TASKS.md** tracks work state
-- **AGENTS.md** provides minimal architecture overview
 - **README.md** is the public entry point
 
 Never duplicate information across files. Reference it instead.
@@ -26,11 +26,14 @@ Only keep files that serve a distinct, non-redundant purpose:
 
 | File | Purpose |
 |------|---------|
-| `AGENTS.md` | Minimal architecture overview (hierarchy, layout, principles) |
+| `AGENTS.md` | General architecture overview, structure, and project-specific context |
 | `TASKS.md` | Active work items |
 | `README.md` | Public-facing project description and quick start |
+| `INSTRUCTIONS.md` | Published-project operator/contributor instructions only |
 
 All other knowledge lives in skills (loaded on-demand) or agent prompts (always loaded with that agent).
+
+`INSTRUCTIONS.md` should only exist when the project is intended for publication or external consumption.
 
 ## Agent Hierarchy Pattern
 
@@ -46,31 +49,10 @@ Design for context efficiency:
 - Subagents use cheaper models for all heavy lifting
 - Skills provide knowledge on-demand — not preloaded into every conversation
 
-## Deployment Pattern
-
-`dist/` is the source of truth. Deploy via symlinks.
-
-```
-dist/
-  agents/     → ~/.config/opencode/agents/
-  skills/     → ~/.config/opencode/skills/
-  commands/   → ~/.config/opencode/commands/
-  plugins/    → ~/.config/opencode/plugins/
-```
-
-Scripts:
-- `scripts/deploy.sh` — creates symlinks (idempotent)
-- `scripts/undeploy.sh` — removes symlinks
-
-Changes to files in dist/ reflect immediately via symlinks. Agent prompt changes require a session restart.
-
-## Bootstrap a New Project
-
-1. Create `dist/agents/` with at least a primary agent
-2. Create `dist/skills/` for domain knowledge
-3. Create `scripts/deploy.sh` and `scripts/undeploy.sh`
-4. Create minimal root files: `AGENTS.md`, `TASKS.md`, `README.md`
-5. Run deploy script
-6. Start working
-
 Keep it minimal. Add files and skills only when they serve a clear, non-redundant purpose.
+
+## Detailed Standards
+
+For the full general project architecture standard, see:
+
+- `docs/architecture-spec.md`

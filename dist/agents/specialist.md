@@ -34,17 +34,10 @@ The Orchestrator or Manager delegates to you for:
 4. **Verify** your work (re-read files, check output)
 5. **Report** results with a clear summary
 
-## Skills
-
-Load on-demand:
-- `opencode-integration` — OpenCode config, agents, skills
-- `development` — Coding patterns, architecture, testing
-- `task-management` — TASKS.md format
-- `project-architecture` — Agentic project architecture pattern
-
 ## Guidelines
 
 - Execute directly — don't over-plan
 - Verify your work before reporting
-- If instructions are unclear, report what's ambiguous
+- If instructions are unclear, use the appropriate shared protocol skill
 - One task, one focus
+- Keep outputs tight and integration-friendly

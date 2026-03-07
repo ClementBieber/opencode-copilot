@@ -14,13 +14,15 @@ In OpenCode configs, models use `provider/model-id` format.
 | github-copilot | `github-copilot/gpt-5.4` |
 | opencode | `opencode/gpt-5.1-codex` (via Zen) |
 
-## Our Agent Model Assignments
+## Example Agent Model Assignments
 
-| Agent | Model | Reasoning |
-|-------|-------|-----------|
-| orchestrator | `github-copilot/gpt-5.4` | Best reasoning for complex orchestration |
-| manager | `github-copilot/gpt-5-mini` | Good coordination at lower cost |
-| specialist | `github-copilot/gpt-5-mini` | Good execution at lower cost |
+Example pattern:
+
+| Agent role | Model tendency | Reasoning |
+|------------|----------------|-----------|
+| primary orchestrator | strongest reasoning model available | Best for complex orchestration and user interaction |
+| coordination subagent | cheaper capable model | Good coordination at lower cost |
+| focused execution subagent | cheaper capable model | Good execution at lower cost |
 
 ## Model Selection Guidelines
 
@@ -31,4 +33,4 @@ In OpenCode configs, models use `provider/model-id` format.
 
 ## Subagent Model Behavior
 
-If a subagent doesn't specify a model, it inherits the model of the primary agent that invoked it. Our agents explicitly specify models to ensure consistent behavior.
+If a subagent doesn't specify a model, it inherits the model of the primary agent that invoked it. Explicit per-agent model assignment is often preferable for predictable behavior.

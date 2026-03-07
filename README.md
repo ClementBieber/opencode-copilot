@@ -1,6 +1,6 @@
 # OpenCode Copilot
 
-Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. 5 agents coordinate development tasks through a delegation hierarchy, deployed globally and available in every project.
+Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. Agents coordinate development tasks through a delegation hierarchy and are deployed globally via symlinks.
 
 ## Quick Start
 
@@ -27,13 +27,7 @@ Deploy creates individual file/directory symlinks from `dist/` into `~/.config/o
 
 ## Agent Hierarchy
 
-| Agent | Model | Role |
-|-------|-------|------|
-| Orchestrator (primary) | gpt-5.4 | User-facing coordination, delegation |
-| Manager (subagent) | gpt-5-mini | Task decomposition, multi-domain coordination |
-| Specialist (subagent) | gpt-5-mini | Focused execution (code, config, research) |
-| System (subagent) | gpt-5-mini | Diagnostics, infrastructure, troubleshooting |
-| Researcher (primary) | gpt-5-mini | Science research, paper search, documentation, domain knowledge |
+See `AGENTS.md` for the current project overview and `dist/agents/*.md` for canonical agent behavior.
 
 ## Project Structure
 
@@ -49,23 +43,10 @@ AGENTS.md                # Minimal architecture overview
 TASKS.md                 # Active work items
 ```
 
-## Skills
+## Skills and Commands
 
-| Skill | Purpose |
-|-------|---------|
-| opencode-integration | OpenCode config format, deployment |
-| development | Coding patterns, architecture, testing |
-| task-management | TASKS.md format and conventions |
-| project-architecture | Agentic project architecture pattern |
-| research | Science research workflow, source conventions, archive format |
-
-## Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/init` | Interactive project onboarding — creates lean AGENTS.md |
-| `/overview` | Project state inspection via specialist |
-| `/order` | File reorganization |
+Canonical skill knowledge lives in `dist/skills/*/SKILL.md`.
+Canonical command behavior lives in `dist/commands/*.md`.
 
 ## Design Principles
 

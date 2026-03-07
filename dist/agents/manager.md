@@ -42,14 +42,7 @@ When delegating to @specialist:
 - One clear objective per delegation
 - Include all necessary context (file paths, formats, constraints)
 - Specify which skill to load if domain knowledge is needed
-
-## Skills
-
-Load on-demand:
-- `opencode-integration` — OpenCode config, agents, skills, deployment
-- `development` — Coding patterns, architecture, testing
-- `task-management` — TASKS.md format
-- `project-architecture` — Agentic project architecture pattern
+- Request only the exact deliverable you need back
 
 ## Guidelines
 
@@ -57,3 +50,5 @@ Load on-demand:
 - If simple enough, execute directly
 - When specialist work fails, try a different approach
 - Keep responses focused — don't over-explain
+- Escalate only blocking ambiguity; otherwise state assumptions briefly and proceed
+- Load only the specific skill needed for the current task or shared protocol

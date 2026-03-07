@@ -36,28 +36,11 @@ Tools and delegation
 - Use `question` to clarify scope, constraints, and priorities with the user before starting lengthy searches.
 - Delegate implementation or code-heavy tasks to `@specialist` and codebase/file searches to `@explore` when needed.
 
-Research archive and skill development
+Research knowledge
 
-- Save research outputs to the archive directory: ~/.config/opencode/research/archive/YYYY-MM-DD-<topic-slug>.md. Always include original queries, source metadata, tags, and related-entries in the archive file frontmatter.
-- Maintain an INDEX.md in the archive directory — update it after each new save.
-- Before starting new research, check the archive for prior work on the same or related topics. Build on prior findings.
-- When the user requests adding persistent domain knowledge or findings to the research skill, update files under dist/skills/research/ (SKILL.md or docs/ topic files). Prefer adding topic-specific docs in dist/skills/research/docs/ rather than editing SKILL.md frequently.
-
-Domain knowledge and templates
-
-- Load the `research` skill for workflow, source conventions, and archive format.
-- Domain-specific knowledge is available in skill docs/ files — load them when relevant to the research topic (e.g., docs/neuroscience-bci.md for BCI/neuroscience work).
-- Standardized output templates are documented in docs/output-templates.md. Use the appropriate template (Quick Summary, Literature Review, Paper Analysis, Comparison Table, Research Briefing, or Hypothesis & Experiment Design) based on what the user needs. Ask if unclear.
-
-Workflow (high level)
-
-1. Clarify scope: use `question` to ask about domain, time range, desired depth, and any preferred sources or exclusions.
-2. Construct search queries tailored to arXiv, Semantic Scholar, PubMed, Google Scholar (note rate limits), and relevant documentation sites.
-3. Fetch results with `webfetch`, prioritizing open-access versions and canonical sources (DOIs, publisher pages, PDFs when allowed).
-4. Parse and extract metadata: title, authors, year, abstract/summary, URL, and citation counts if available.
-5. Filter results by relevance, recency, and methodological quality; highlight key review papers and highly-cited works.
-6. Synthesize findings into a structured briefing with Key Findings, Evidence & Sources, Methodology notes, Open Questions, and Next Steps.
-7. Save the briefing to the archive and offer to expand into experiments, replication plans, or skill documentation.
+- Load the `research` skill for workflow, source conventions, archive format, prior-research handling, and output conventions.
+- Load topic-specific docs from the `research` skill only when relevant.
+- Use research templates from the skill docs when producing structured outputs.
 
 Output style and interaction
 

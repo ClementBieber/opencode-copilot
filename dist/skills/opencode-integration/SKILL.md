@@ -7,14 +7,14 @@ description: Knowledge about OpenCode's native configuration system including ag
 
 ## System Architecture
 
-This project produces deployable OpenCode configurations in `dist/`. These are symlinked into `~/.config/opencode/` via `scripts/deploy.sh`.
+OpenCode configurations are typically stored as agents, skills, commands, and plugins, then deployed into `~/.config/opencode/` or project-local `.opencode/` directories.
 
 ```
 dist/
-  agents/     -> ~/.config/opencode/agents/    (4 agent .md files)
-  skills/     -> ~/.config/opencode/skills/    (4 skill directories)
-  commands/   -> ~/.config/opencode/commands/  (command .md files)
-  plugins/    -> ~/.config/opencode/plugins/   (plugin .ts files)
+  agents/     -> ~/.config/opencode/agents/
+  skills/     -> ~/.config/opencode/skills/
+  commands/   -> ~/.config/opencode/commands/
+  plugins/    -> ~/.config/opencode/plugins/
 ```
 
 ## Agent Configuration Format
@@ -94,25 +94,23 @@ Remote -> Global (`~/.config/opencode/opencode.json`) -> Custom -> Project (`ope
 
 Later sources override earlier ones. Configs are **merged**, not replaced.
 
-## Our 4-Agent Architecture
+## Common Deployment Pattern
 
-| Agent | Mode | Model | Role |
-|-------|------|-------|------|
-| orchestrator | primary | gpt-5.4 | Coordination, delegation, user interaction |
-| manager | subagent | gpt-5-mini | Task decomposition, multi-domain coordination |
-| specialist | subagent | gpt-5-mini | Focused execution, single-domain tasks |
-| system | subagent | gpt-5-mini | Diagnostics, infrastructure, troubleshooting |
-
-**Hierarchy:** Orchestrator -> Manager, Specialist, or System. Manager -> Specialist or System. Specialist -> Explore only. System -> Specialist or Explore.
+Many OpenCode setups use:
+- a primary orchestration agent
+- one or more subagents for focused execution
+- skills for on-demand knowledge
+- commands for user-facing shortcuts
+- plugins for runtime hooks
 
 ## Deployment
 
-- `scripts/deploy.sh` - creates symlinks from dist/ subdirs to ~/.config/opencode/
-- `scripts/undeploy.sh` - removes only symlinks that point to our dist/
-- Preserves existing ~/.config/opencode/ content (package.json, node_modules, etc.)
+- Deployment is often handled by project scripts that create symlinks from a source-of-truth directory such as `dist/` into `~/.config/opencode/`
+- Safe deployment should preserve unrelated existing content in `~/.config/opencode/`
 
 ## Reference
 
 For detailed documentation, see `docs/` in this skill directory:
 - `docs/config-reference.md` - Full opencode.json schema reference
 - `docs/model-providers.md` - Available providers and model IDs
+- `docs/system-integration-governance.md` - Rules for integrating tools into the Linux/OpenCode environment

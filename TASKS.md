@@ -35,3 +35,7 @@ Last Updated: 2026-03-07
 ## Backlog
 
 - Import legacy session archives into OpenCode DB (optional)
+- Formalize delegation protocol for parent/subagent contracts (inputs, outputs, blocked state, noise limits)
+- Review the full OpenCode sessions system for project-specific and system-wide session handling; evaluate using sessions as the source of project context and history
+- Analyze https://github.com/affaan-m/everything-claude-code as a potential source of reusable skills for this architecture
+- Track and remove duplicated information across prompts, skills, docs, and root files with explicit canonical ownership
