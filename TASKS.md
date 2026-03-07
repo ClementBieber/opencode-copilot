@@ -52,15 +52,21 @@ Last Updated: 2026-03-07
 - ✅ explore.md and general.md agents created (override built-in agents to use gpt-5-mini)
 - ✅ profiles/full.txt updated with explore.md and general.md
 - ✅ AGENTS.md architecture diagram updated with explore/general agents
+- ✅ compaction.md and summary.md agents created (override built-in agents to use gpt-5-mini)
+- ✅ Full duplication audit completed — 3 critical + 4 moderate duplications found and fixed:
+  - Design principles (context-efficiency, unicity, delegation) consolidated into project-architecture skill
+  - Blocked-state format deduplicated (SKILL.md → pointer to docs/delegation-spec.md)
+  - Verify-your-work checklist deduplicated (specialist.md → development skill)
+  - AGENTS.md line-count conflict resolved (standardized to 25 lines)
+  - Compaction plugin recovery text slimmed (session-index docs = canonical)
+- ✅ Full profile now at 24 deployed items (10 agents, 9 skills, 4 commands, 1 plugin)
 
 ## In Progress
 
-- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT)
+- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 7 commits pending)
 
 ## Backlog
 
-- Import legacy session archives into OpenCode DB (optional)
-- Formalize delegation protocol further (currently draft in skill docs)
 - Selective ECC skill extraction (autonomous loops, continuous learning, cost-aware pipeline)
 - System operations: install pip3/pipx/gh (needs sudo)
-- Track and remove remaining duplicated information across prompts, skills, docs, and root files
+- Import legacy session archives into OpenCode DB (optional)
