@@ -6,6 +6,8 @@ agents/research-synthesizer.md
 agents/researcher.md
 agents/explore.md
 agents/general.md
+agents/compaction.md
+agents/summary.md
 skills/opencode-integration
 skills/development
 skills/task-management
