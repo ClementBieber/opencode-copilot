@@ -2,7 +2,6 @@ agents/orchestrator.md
 agents/manager.md
 agents/specialist.md
 agents/system.md
-agents/research-synthesizer.md
 agents/researcher.md
 agents/explore.md
 agents/general.md
@@ -23,5 +22,4 @@ skills/continuous-learning
 commands/init.md
 commands/overview.md
 commands/order.md
-commands/last30.md
 plugins/compaction.ts
