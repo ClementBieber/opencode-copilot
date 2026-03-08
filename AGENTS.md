@@ -30,7 +30,7 @@ Researcher (gpt-5-mini, primary)
 
 See `dist/skills/project-architecture/SKILL.md` for canonical architecture principles.
 
-Key: Primary agents (Orchestrator, Researcher) run on gpt-5-mini for cost efficiency. All subagents and built-in overrides run on claude-opus-4.6 for execution quality.
+Key: Primary agents (Orchestrator, Researcher) run on gpt-5-mini for cost efficiency. All subagents and built-in overrides run on claude-opus-4.6 for higher-quality execution.
 
 Project-specific overview belongs here.
 Agent details live in `dist/agents/*.md`.
