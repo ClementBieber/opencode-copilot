@@ -5,11 +5,15 @@ Multi-agent orchestration system for OpenCode.
 ## Architecture
 
 ```
-Orchestrator (claude-opus-4.6, primary — thin router/looper)
+Orchestrator (gpt-5-mini, primary — thin router/looper)
 ├── Manager (claude-opus-4.6, subagent)
 ├── Specialist (claude-opus-4.6, subagent)
 ├── System (claude-opus-4.6, subagent)
-└── Research-Synthesizer (claude-opus-4.6, subagent)
+├── Research-Synthesizer (claude-opus-4.6, subagent)
+├── Explore (claude-opus-4.6, built-in override)
+├── General (claude-opus-4.6, built-in override)
+├── Compaction (claude-opus-4.6, built-in override)
+└── Summary (claude-opus-4.6, built-in override)
 
 Researcher (gpt-5-mini, primary)
 ├── @specialist (delegation)
@@ -26,7 +30,7 @@ Researcher (gpt-5-mini, primary)
 
 See `dist/skills/project-architecture/SKILL.md` for canonical architecture principles.
 
-Key: Orchestrator is a thin router/looper on the expensive model. All subagents also run on claude-opus-4.6. Built-in agents (explore, general, compaction, summary) inherit the caller's model — no overrides needed.
+Key: Primary agents (Orchestrator, Researcher) run on gpt-5-mini for cost efficiency. All subagents and built-in overrides run on claude-opus-4.6 for execution quality.
 
 Project-specific overview belongs here.
 Agent details live in `dist/agents/*.md`.
