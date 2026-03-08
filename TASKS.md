@@ -70,14 +70,22 @@ Last Updated: 2026-03-08
   - continuous-learning implementation-guide: added OpenCode session DB as data source (schema, hook points, query pipeline)
   - cost-aware-llm-pipeline SKILL.md: added request-based billing model acknowledgment (GitHub Copilot)
 - ✅ Fixed markdown formatting in all 6 ECC skill files (underline-style headers → ATX ## style)
+- ✅ Architecture refactor: all subagents upgraded to claude-opus-4.6, orchestrator slimmed to thin router
+  - Deleted built-in agent overrides (explore, general, compaction, summary) — they inherit caller's model
+  - Profile reduced from 27 to 23 items (6 agents, 12 skills, 4 commands, 1 plugin)
+  - Merged feature/opus-subagents → main
+- ✅ README.md profile counts fixed (17 → 23)
+- ✅ Investigated and mitigated "assistant message prefill" error:
+  - Root cause: OpenCode appends assistant-role message at max steps; Claude 4.6 rejects prefill
+  - Fix: increased orchestrator steps from 12 → 100
+  - Upstream fix: PR #14772 (not yet merged in OpenCode v1.2.21)
 
 ## In Progress
 
-- 🔄 Architecture change: all subagents on opus, orchestrator as thin router (feature/opus-subagents branch)
-- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 9+ commits pending)
+- 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 11+ commits pending)
 
 ## Backlog
 
-- Update README.md profile counts (currently stale — says 12/17, should reflect 27 items)
+- Build OpenCode from source with PR #14772 fix if prefill error persists (strips trailing assistant messages for Claude 4.6)
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)

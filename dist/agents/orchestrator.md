@@ -3,7 +3,7 @@ description: Primary orchestration agent. Coordinates complex tasks by delegatin
 mode: primary
 model: github-copilot/claude-opus-4.6
 temperature: 0.2
-steps: 12
+steps: 100
 color: "#4A90D9"
 permission:
   edit: allow
