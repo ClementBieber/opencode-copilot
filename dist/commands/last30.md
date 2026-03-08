@@ -60,14 +60,27 @@ After receiving the result:
 
 ### Watchlist Sweep
 
-1. Read the watchlist file at `~/.config/opencode/last30days/watchlist.json`. This file contains an array of topic objects, each with at least a `name` field and optionally `last_researched`, `schedule`, and `search_queries`.
+> **Watchlist source priority:** The command uses the installed skill's
+> `watchlist.py` script (SQLite-backed) as the primary topic source.
+> If the script is missing or fails, it falls back to the legacy static
+> file at `~/.config/opencode/last30days/watchlist.json`.
 
-2. If the file does not exist or is empty, tell the user:
-   > No watchlist found at `~/.config/opencode/last30days/watchlist.json`. Use `/last30 <topic>` for ad-hoc research, or create the watchlist file with an array of `{"name": "topic"}` objects.
+1. **Obtain the topic list.** Run the upstream skill's watchlist script to get the current topics:
+
+   ```bash
+   python3 "$(git rev-parse --show-toplevel)/dist/skills/last30days/scripts/watchlist.py" list
+   ```
+
+   Parse the JSON output — the result contains a `topics` array of objects (each with at least a `name` field, plus `enabled`, `schedule`, `search_queries`, and `last_researched`). Keep only topics where `enabled` is true (or missing, which defaults to true).
+
+   **Fallback:** If the script does not exist or exits non-zero, read the legacy watchlist file at `~/.config/opencode/last30days/watchlist.json` instead. That file contains a plain JSON array of topic objects, each with at least a `name` field.
+
+2. If no topics are found from either source, tell the user:
+   > No watchlist topics found. Use `/last30 <topic>` for ad-hoc research, or add topics with `python3 dist/skills/last30days/scripts/watchlist.py add "topic name"`.
 
 3. For each topic in the watchlist, delegate to the `research-synthesizer` subagent using the same prompt template from [Ad-hoc Research](#ad-hoc-research), substituting `{TOPIC}` with the topic's `name` field. You may batch multiple Task tool calls in a single message for parallelism.
 
-4. After each successful COMPLETED result, update the topic's `last_researched` field in `watchlist.json` to the current ISO 8601 timestamp (e.g., `"2026-03-08T14:30:00Z"`). Write the updated watchlist back to disk.
+4. After each successful COMPLETED result, update the topic's `last_researched` timestamp. If using the watchlist script, this is handled automatically by the SQLite store. If using the legacy JSON fallback, update the topic's `last_researched` field in `watchlist.json` to the current ISO 8601 timestamp (e.g., `"2026-03-08T14:30:00Z"`) and write the file back to disk.
 
 5. After all topics are processed, present a summary table to the user:
 
