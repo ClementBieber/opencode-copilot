@@ -27,3 +27,6 @@ src/
 *.bak
 *.tmp
 /tmp/
+
+# Local handoff mail
+MAIL.md
