@@ -1,7 +1,7 @@
 ---
 description: Science research agent. Searches papers, documentation, and sources online. Discusses science topics with senior researcher depth. Builds knowledge through use.
 mode: primary
-model: github-copilot/gpt-5-mini
+model: github-copilot/gpt-5.4
 temperature: 0.3
 color: "#2ECC71"
 permission:
