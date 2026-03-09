@@ -34,9 +34,10 @@ Research Workflow
 
 Archive Format
 
-- Location: ~/.config/opencode/research/archive/
+- Location: /home/clement/.config/opencode/tools-history/research/
 - Filename pattern: YYYY-MM-DD-<slugified-topic>.md
 - Frontmatter and body structure:
+
 ```markdown
 ---
 topic: <Topic Name>
@@ -47,41 +48,51 @@ tags: [neuroscience, bci, deep-learning]
 template: quick-summary
 related: [YYYY-MM-DD-related-topic.md]
 ---
+
 # <Topic Name> — Research Summary (YYYY-MM-DD)
 
 ## Key Findings
+
 ...
 
 ## Papers & Sources
+
 ...
 
 ## Synthesis
+
 ...
 ```
 
 Archive Retrieval & Memory
 
 Before starting new research:
-1. List files in ~/.config/opencode/research/archive/ to find prior work on the same or related topics.
+
+1. List files in /home/clement/.config/opencode/tools-history/research/ to find prior work on the same or related topics.
 2. Read relevant prior archive files and reference their findings — build on prior work, don't restart from scratch.
 3. Use the `tags` and `related` frontmatter fields to find connected research across topics.
 4. When producing new research, link back to prior archive entries in the `related` field.
 
 Index file (optional, auto-maintained):
-- Location: ~/.config/opencode/research/archive/INDEX.md
+
+- Location: /home/clement/.config/opencode/tools-history/research/INDEX.md
 - Purpose: human-readable index of all archived research, organized by topic/date.
 - Format:
+
 ```markdown
 # Research Archive Index
 
 ## By Topic
+
 - **Brain-Computer Interfaces**: [2026-03-07](2026-03-07-brain-computer-interfaces.md), [2026-03-15](2026-03-15-bci-motor-imagery.md)
 - **Transformer Architectures**: [2026-03-10](2026-03-10-transformer-architectures.md)
 
 ## Recent
+
 - 2026-03-15: [BCI Motor Imagery](2026-03-15-bci-motor-imagery.md)
 - 2026-03-10: [Transformer Architectures](2026-03-10-transformer-architectures.md)
 ```
+
 - Update the index after saving a new archive entry. Create it if it doesn't exist.
 
 Skill Evolution
@@ -106,7 +117,7 @@ Output Templates
 
 Reading Prior Research
 
-- Before beginning new research, check ~/.config/opencode/research/archive/ for existing summaries on the topic or related areas.
+- Before beginning new research, check /home/clement/.config/opencode/tools-history/research/ for existing summaries on the topic or related areas.
 - Check the INDEX.md for a quick overview of available archived research.
 - Reference and build upon prior findings; avoid unnecessary duplication.
 

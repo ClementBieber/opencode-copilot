@@ -40,7 +40,7 @@ Steps:
 2. Run the research script with --agent flag.
 3. Supplement with webfetch for blogs/docs/news.
 4. Synthesize findings following the skill's Judge Agent rules.
-5. Save the briefing to: ~/.config/opencode/last30days/history/{DATE}-{SLUG}.md
+5. Save the briefing to: /home/clement/.config/opencode/tools-history/last30days/{DATE}-{SLUG}.md
    where {SLUG} is the topic lowercased, spaces replaced with hyphens, special chars removed, max 60 chars.
 6. Verify the file was written successfully.
 7. Return the output contract JSON as your final message.
@@ -63,7 +63,7 @@ After receiving the result:
 > **Watchlist source priority:** The command uses the installed skill's
 > `watchlist.py` script (SQLite-backed) as the primary topic source.
 > If the script is missing or fails, it falls back to the legacy static
-> file at `~/.config/opencode/last30days/watchlist.json`.
+> file at `/home/clement/.config/opencode/tools-history/last30days/watchlist.json`.
 
 1. **Obtain the topic list.** Run the upstream skill's watchlist script to get the current topics:
 
@@ -73,7 +73,7 @@ After receiving the result:
 
    Parse the JSON output — the result contains a `topics` array of objects (each with at least a `name` field, plus `enabled`, `schedule`, `search_queries`, and `last_researched`). Keep only topics where `enabled` is true (or missing, which defaults to true).
 
-   **Fallback:** If the script does not exist or exits non-zero, read the legacy watchlist file at `~/.config/opencode/last30days/watchlist.json` instead. That file contains a plain JSON array of topic objects, each with at least a `name` field.
+   **Fallback:** If the script does not exist or exits non-zero, read the legacy watchlist file at `/home/clement/.config/opencode/tools-history/last30days/watchlist.json` instead. That file contains a plain JSON array of topic objects, each with at least a `name` field.
 
 2. If no topics are found from either source, tell the user:
    > No watchlist topics found. Use `/last30 <topic>` for ad-hoc research, or add topics with `python3 dist/skills/last30days/scripts/watchlist.py add "topic name"`.

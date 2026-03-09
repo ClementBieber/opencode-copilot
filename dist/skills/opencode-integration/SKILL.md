@@ -108,6 +108,13 @@ Many OpenCode setups use:
 - Deployment is often handled by project scripts that create symlinks from a source-of-truth directory such as `dist/` into `~/.config/opencode/`
 - Safe deployment should preserve unrelated existing content in `~/.config/opencode/`
 
+## Project Moves and Session Continuity
+
+- After a project folder rename, move, split, or merge, also update OpenCode's session DB at `~/.local/share/opencode/opencode.db` so prior conversations remain visible from the new location
+- For common whole-project renames and moves, use `python3 ~/.config/opencode/skills/opencode-integration/scripts/move_project_sessions.py --old-path <old> --new-path <new>`
+- Keep OpenCode closed while migrating; the helper creates a backup automatically before writing
+- See `docs/project-moves-and-session-continuity.md` for helper usage plus manual guidance for splits and merges
+
 ## Reference
 
 For detailed documentation, see `docs/` in this skill directory:
@@ -115,3 +122,4 @@ For detailed documentation, see `docs/` in this skill directory:
 - `docs/model-providers.md` - Available providers and model IDs
 - `docs/agent-system-architecture.md` - Design principles for agents, skills, commands, and plugins
 - `docs/system-integration-governance.md` - Rules for integrating tools into the Linux/OpenCode environment
+- `docs/project-moves-and-session-continuity.md` - How to keep session history linked after folder renames, moves, and project splits
