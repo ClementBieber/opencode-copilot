@@ -37,7 +37,7 @@ See `AGENTS.md` for the current project overview and `dist/agents/*.md` for cano
 dist/                    # Source of truth — deployed via symlinks
   agents/                # Agent definitions (YAML frontmatter + markdown)
   skills/                # Skill definitions (on-demand knowledge)
-  commands/              # Custom commands (/init, /overview, /order)
+  commands/              # Custom slash commands
   plugins/               # Plugins (compaction.ts)
 profiles/                # Deployment profiles (lite.txt, full.txt)
 scripts/                 # deploy.sh / undeploy.sh
