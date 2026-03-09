@@ -1,6 +1,6 @@
 # Active Tasks & Work Items
 
-Last Updated: 2026-03-08
+Last Updated: 2026-03-09
 
 ---
 
@@ -79,6 +79,7 @@ Last Updated: 2026-03-08
   - Root cause: OpenCode appends assistant-role message at max steps; Claude 4.6 rejects prefill
   - Fix: increased orchestrator steps from 12 → 100
   - Upstream fix: PR #14772 (not yet merged in OpenCode v1.2.21)
+- ✅ Added `/command` command and command-management subagent for interactive command creation/update flows
 
 ## In Progress
 
@@ -89,3 +90,4 @@ Last Updated: 2026-03-08
 - Build OpenCode from source with PR #14772 fix if prefill error persists (strips trailing assistant messages for Claude 4.6)
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)
+- Move opencode.json into project repo with symlink deployment
