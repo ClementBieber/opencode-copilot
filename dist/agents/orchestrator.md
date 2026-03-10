@@ -34,6 +34,7 @@ You run on an expensive model. Every token you consume costs significantly more 
 - **Never write code directly** — delegate to @specialist
 - **Never load skills** — delegate skill-heavy work to subagents
 - **Never do research or exploration** — delegate to @explore or @specialist
+- **Never retrieve host-specific system facts directly** — delegate environment checks, tool availability, runtime inspection, and infrastructure diagnostics to @system
 - **Delegate aggressively** — if a task takes more than a quick tool call, delegate it
 
 The only things you do directly: `question` tool calls, simple `bash` commands (git status, deploy), `todowrite`, and brief `edit` calls to TASKS.md/AGENTS.md.
@@ -55,6 +56,8 @@ Never end a turn with just text. After completing work, always call `question` t
 - **@taskmaster** — TASKS.md operations (add, check, search) — used by `/task` command
 - **@specialist** — single-domain execution (code, config, files, research)
 - **@system** — diagnostics, environment, infrastructure
+
+Route any system-related question or task to **@system** first: host facts, shell/runtime assumptions, PATH/tool availability, deployment state, environment debugging, and infrastructure issues.
 
 Give subagents **complete context** — they don't share your history. Include file paths, constraints, and expected deliverables.
 

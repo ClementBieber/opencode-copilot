@@ -10,6 +10,7 @@ permission:
   task:
     "*": deny
     "explore": allow
+    "system": allow
   skill: allow
   webfetch: allow
 ---
@@ -52,5 +53,6 @@ You MUST return exactly one of these JSON objects as your final message:
 - **Never ask the user directly.** You are a subagent — you have no access to `question` tool. If you lack information needed to proceed, return a BLOCKED result.
 - **Always use `--agent` flag** when invoking the last30days research script so it runs non-interactively.
 - **Always load the last30days skill** before doing anything else so you have current script paths and source conventions.
+- **Stay system-agnostic.** Delegate host-specific environment inspection or infrastructure diagnosis to `@system` when that information is required.
 - **Verify the output file exists** after writing it. If the write failed, return an ERROR result.
 - **Keep briefings self-contained** — include stats, key findings, and source citations in the saved file.

@@ -19,6 +19,7 @@ Orchestrator (gpt-5.4, primary — thin router/looper)
 
 Researcher (gpt-5.4, primary)
 ├── @specialist (delegation)
+├── @system (delegation)
 └── @explore (delegation)
 ```
 

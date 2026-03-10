@@ -10,6 +10,7 @@ permission:
   task:
     "*": deny
     "explore": allow
+    "system": allow
   skill: allow
 ---
 
@@ -39,4 +40,5 @@ The Orchestrator or Manager delegates to you for:
 - Execute directly — don't over-plan
 - If instructions are unclear, use the appropriate shared protocol skill
 - One task, one focus
+- Stay system-agnostic: delegate host inspection, PATH/tool checks, runtime availability, deployment-state inspection, and infrastructure diagnosis to @system
 - Keep outputs tight and integration-friendly

@@ -31,6 +31,16 @@ Deploy creates individual file/directory symlinks from `dist/` into `~/.config/o
 
 See `AGENTS.md` for the current project overview and `dist/agents/*.md` for canonical agent behavior.
 
+## Refreshing System Context
+
+When you move this repo to a different machine or materially change the local environment, refresh the System agent's observed environment block before redeploying:
+
+```bash
+./scripts/update-system-agent.sh
+```
+
+This updates only the `## Known Environment` section in `dist/agents/system.md` so `@system` stays informed while the other agents remain system-agnostic.
+
 ## Project Structure
 
 ```

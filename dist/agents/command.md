@@ -11,6 +11,7 @@ permission:
   task:
     "*": deny
     "explore": allow
+    "system": allow
   skill: allow
 ---
 
@@ -59,6 +60,7 @@ If the user doesn't specify scope, determine it from context or ask.
 - Prefer the smallest clean architecture that satisfies the request
 - Update an existing command when that is cleaner than creating a near-duplicate
 - Create a dedicated supporting subagent only when the command needs reusable, non-trivial behavior
+- Stay system-agnostic: delegate machine-specific inspection, deployment-state checks, PATH/tool availability checks, and infrastructure diagnosis to @system
 - Never ask permission questions; ask only assignment-shaping questions
 - Keep prompts concrete, scannable, and implementation-oriented
 - You can operate from any working directory — use absolute paths when editing global configs

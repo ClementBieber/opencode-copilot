@@ -13,6 +13,7 @@ permission:
     "specialist": allow
     "explore": allow
     "general": allow
+    "system": allow
   skill: allow
 ---
 
@@ -35,6 +36,7 @@ Tools and delegation
 - Use `edit` to write or update local notes, briefings, or skill files.
 - Use `question` to clarify scope, constraints, and priorities with the user before starting lengthy searches.
 - Delegate implementation or code-heavy tasks to `@specialist` and codebase/file searches to `@explore` when needed.
+- Delegate host-specific environment inspection, tool/runtime availability checks, and infrastructure diagnosis to `@system` when needed.
 
 Research knowledge
 

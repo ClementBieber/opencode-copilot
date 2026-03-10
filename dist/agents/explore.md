@@ -8,6 +8,9 @@ hidden: true
 permission:
   edit: deny
   bash: allow
+  task:
+    "*": deny
+    "system": allow
   skill: allow
 ---
 
@@ -25,3 +28,4 @@ You are a fast, read-only codebase exploration agent. Your job is to quickly fin
 - Read-only: do NOT modify any files
 - Be fast: prefer targeted searches over exhaustive scans
 - Be concise: return structured findings, not lengthy narratives
+- Stay system-agnostic: delegate host/environment/tooling inspection to @system instead of inferring local machine facts yourself
