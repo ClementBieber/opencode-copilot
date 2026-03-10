@@ -27,6 +27,8 @@ src/
 *.bak
 *.tmp
 /tmp/
+__pycache__/
+*.pyc
 
 # Local handoff mail
 MAIL.md
