@@ -73,6 +73,8 @@ deployed_count=0
 skipped_count=0
 error_count=0
 declared_items=()
+config_installed=0
+config_skipped=0
 
 # Read profile file
 while IFS= read -r line || [ -n "$line" ]; do
@@ -129,6 +131,20 @@ mkdir -p "$(dirname "$target_path")"
     deployed_count=$((deployed_count+1))
 done < "$PROFILE_FILE"
 
+BASE_CONFIG="$PROJECT_DIR/opencode.json"
+TARGET_CONFIG="$CONFIG_DIR/opencode.json"
+
+if [ -f "$BASE_CONFIG" ]; then
+    if [ -e "$TARGET_CONFIG" ]; then
+        echo "  OK:     opencode.json -> already exists, not overwriting"
+        config_skipped=1
+    else
+        cp "$BASE_CONFIG" "$TARGET_CONFIG"
+        echo "  COPY:   opencode.json -> $TARGET_CONFIG"
+        config_installed=1
+    fi
+fi
+
 # Write deployment record
 RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
 {
@@ -136,6 +152,8 @@ RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
     echo "# Profile: $PROFILE_NAME"
     echo "# Source: $DIST_DIR"
     echo "# Date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+    echo "# BaseConfigInstalled: $config_installed"
+    echo "# BaseConfigSkipped: $config_skipped"
     for it in "${declared_items[@]}"; do
         echo "$it"
     done

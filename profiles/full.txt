@@ -30,4 +30,5 @@ commands/last30.md
 commands/mail.md
 commands/order.md
 commands/task.md
+commands/litterature.md
 plugins/compaction.ts

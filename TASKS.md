@@ -1,6 +1,6 @@
 # Active Tasks & Work Items
 
-Last Updated: 2026-03-09
+Last Updated: 2026-03-11
 
 ---
 
@@ -91,3 +91,4 @@ Last Updated: 2026-03-09
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)
 - Move opencode.json into project repo with symlink deployment
+- Create a `@git` agent that specializes in Git-related operations
