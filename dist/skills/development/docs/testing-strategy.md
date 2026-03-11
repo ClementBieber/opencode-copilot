@@ -5,9 +5,9 @@
 ### Agents
 1. Deploy with `scripts/deploy.sh`
 2. Open OpenCode in the project directory
-3. Verify agents appear: Tab through primary agents (should see Orchestrator), @ mention subagents
-4. Test basic delegation: Ask orchestrator to delegate a simple task to specialist
-5. Verify hierarchy enforcement: Specialist should not be able to invoke Manager
+3. Verify visible primary agents match the intended public set and that hidden agents do not appear in the mode picker
+4. Verify `orchestrator` is still reachable through command routing and internal delegation flows
+5. Test basic delegation: Ask orchestrator to delegate a simple task to specialist
 
 ### Skills
 1. After deploy, verify skills appear in skill tool description
@@ -27,9 +27,8 @@
 
 ### Full Delegation Chain
 1. Ask Orchestrator a complex multi-step task
-2. Verify it delegates to Manager for coordination
-3. Verify Manager delegates to Specialist for execution
-4. Verify results flow back through the chain
+2. Verify it delegates directly to the most appropriate subagent when delegation is needed
+3. Verify results flow back cleanly to the user
 
 ### Skill Loading in Delegation
 1. Ask Orchestrator to update TASKS.md
@@ -44,12 +43,12 @@
 ## Smoke Test Checklist
 
 - [ ] `scripts/deploy.sh` runs without errors
-- [ ] Orchestrator appears as primary agent in OpenCode
-- [ ] Manager, Specialist, and System appear as subagents (@ menu)
+- [ ] Orchestrator is hidden from the agent picker
+- [ ] Researcher appears as an intentional visible primary agent when full profile is deployed
+- [ ] Specialist and System appear as subagents (@ menu)
 - [ ] 4 skills appear in skill tool description
 - [ ] `/order` command is available
-- [ ] Orchestrator can delegate to Manager
 - [ ] Orchestrator can delegate to Specialist
-- [ ] Manager can delegate to Specialist
+- [ ] Orchestrator-owned commands route correctly
 - [ ] Skills load correctly when invoked
 - [ ] `scripts/undeploy.sh` cleanly removes symlinks

@@ -72,6 +72,7 @@ done
 deployed_count=0
 skipped_count=0
 error_count=0
+pruned_count=0
 declared_items=()
 config_installed=0
 config_skipped=0
@@ -131,6 +132,47 @@ mkdir -p "$(dirname "$target_path")"
     deployed_count=$((deployed_count+1))
 done < "$PROFILE_FILE"
 
+# Prune stale symlinks from previous deployments that are no longer declared.
+for cat in "${SUBDIRS[@]}"; do
+    dir="$CONFIG_DIR/$cat"
+    if [ ! -d "$dir" ]; then
+        continue
+    fi
+
+    for entry in "$dir"/*; do
+        [ -L "$entry" ] || continue
+
+        raw_target="$(readlink "$entry")"
+        case "$raw_target" in
+            /*) target_path="$raw_target" ;;
+            *) target_path="$(dirname "$entry")/$raw_target" ;;
+        esac
+        resolved_target="$(readlink -m "$target_path")"
+
+        case "$resolved_target" in
+            "$DIST_DIR"/*) ;;
+            *)
+                continue
+                ;;
+        esac
+
+        rel="${entry#$CONFIG_DIR/}"
+        keep=0
+        for declared in "${declared_items[@]}"; do
+            if [ "$declared" = "$rel" ]; then
+                keep=1
+                break
+            fi
+        done
+
+        if [ "$keep" -eq 0 ]; then
+            rm "$entry"
+            echo "  PRUNE:  $rel (stale symlink -> $resolved_target)"
+            pruned_count=$((pruned_count+1))
+        fi
+    done
+done
+
 BASE_CONFIG="$PROJECT_DIR/opencode.json"
 TARGET_CONFIG="$CONFIG_DIR/opencode.json"
 
@@ -160,7 +202,7 @@ RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
 } > "$RECORD_FILE"
 
 echo ""
-echo "Summary: deployed=$deployed_count skipped=$skipped_count errors=$error_count"
+echo "Summary: deployed=$deployed_count skipped=$skipped_count pruned=$pruned_count errors=$error_count"
 echo "Deployment record: $RECORD_FILE"
 echo ""
 echo "Done. Verify with: ls -la $CONFIG_DIR/"

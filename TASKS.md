@@ -7,7 +7,7 @@ Last Updated: 2026-03-11
 ## Completed
 
 - ✅ Migrate to OpenCode native config
-  - ✅ Create 4-agent deployment (Orchestrator, Manager, Specialist, System)
+  - ✅ Create initial multi-agent deployment
   - ✅ Create project-architecture skill
   - ✅ Create /overview, /init, /order commands
 - ✅ Implement Orchestrator loop using native `question` tool
@@ -35,7 +35,7 @@ Last Updated: 2026-03-11
   - delegation-protocol/docs/delegation-spec.md
   - opencode-integration/docs/system-integration-governance.md
 - ✅ Created duplication-audit.md for tracking duplicated information
-- ✅ Cleaned duplicated skill catalogs from manager, specialist, system prompts
+- ✅ Cleaned duplicated skill catalogs across agent prompts
 - ✅ Generalized opencode-integration skill (removed project-specific counts/models)
 - ✅ Trimmed researcher, research-synthesizer prompts (moved details to skills)
 - ✅ Trimmed last30 command (moved path/persistence details to skill)
@@ -80,6 +80,7 @@ Last Updated: 2026-03-11
   - Fix: increased orchestrator steps from 12 → 100
   - Upstream fix: PR #14772 (not yet merged in OpenCode v1.2.21)
 - ✅ Added `/command` command and command-management subagent for interactive command creation/update flows
+- ✅ Removed deprecated coordination subagent and repositioned Orchestrator as hidden default command handler
 
 ## In Progress
 

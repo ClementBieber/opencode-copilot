@@ -40,9 +40,14 @@ else
         fi
         # Iterate entries
         for entry in "$dir"/*; do
-            [ -e "$entry" ] || continue
+            [ -L "$entry" ] || continue
+            raw_target="$(readlink "$entry")"
+            case "$raw_target" in
+                /*) target_path="$raw_target" ;;
+                *) target_path="$(dirname "$entry")/$raw_target" ;;
+            esac
+            target="$(readlink -m "$target_path")"
             if [ -L "$entry" ]; then
-                target="$(readlink -f "$entry")"
                 case "$target" in
                     "$DIST_DIR"/*)
                         # compute relative path from dist/
@@ -64,7 +69,12 @@ for item in "${items_to_remove[@]}"; do
         skipped=$((skipped+1))
         continue
     fi
-    link_target="$(readlink -f "$tgt")"
+    raw_target="$(readlink "$tgt")"
+    case "$raw_target" in
+        /*) target_path="$raw_target" ;;
+        *) target_path="$(dirname "$tgt")/$raw_target" ;;
+    esac
+    link_target="$(readlink -m "$target_path")"
     case "$link_target" in
         "$DIST_DIR"/*)
             rm "$tgt"

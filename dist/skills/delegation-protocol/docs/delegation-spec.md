@@ -61,7 +61,6 @@ No extra commentary.
 ## 6. Parent Integration Rule
 
 - Orchestrator → convert blocked state into a `question` tool call
-- Manager → propagate blocked state upward unless it can resolve internally
 - Specialist/System → return blocked state upward
 
 ## 7. Noise Limits

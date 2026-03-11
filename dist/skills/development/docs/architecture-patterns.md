@@ -17,23 +17,25 @@ Structure agents in a clear delegation hierarchy:
 User
   |
   v
-Orchestrator (primary, expensive model)
+Commands / default handling flow
   |
-  +---> Manager (subagent, cheap model) → coordination
-  |       |
-  |       +---> Specialist (subagent, cheap model) → execution
-  |       +---> System (subagent, cheap model) → diagnostics
+  v
+Orchestrator (hidden all-mode handler)
   |
-  +---> Specialist (direct delegation for simple tasks)
+  +---> Specialist (subagent) → execution
+  +---> System (subagent) → diagnostics
+  +---> Command (subagent) → command architecture
+
+Specialized primary agents
   |
-  +---> System (direct delegation for infra/diagnostics)
+  +---> own command flows when intentionally designed that way
 ```
 
 Rules:
-- Primary agent handles user interaction and high-level coordination
-- Subagents do heavy execution on cheaper models
-- Enforce hierarchy via permission rules (e.g., `permission.task` in frontmatter)
-- Each level has a clear, non-overlapping responsibility
+- Hidden handlers can own default command routing without appearing in the public agent picker
+- Specialized primary agents may own their own commands directly when that improves clarity
+- Subagents do focused execution and bounded specialist work
+- Enforce delegation boundaries via permission rules (e.g., `permission.task` in frontmatter)
 
 ## Skills-as-Knowledge Pattern
 

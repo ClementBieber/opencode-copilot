@@ -1,5 +1,4 @@
 agents/orchestrator.md
-agents/manager.md
 agents/command.md
 agents/specialist.md
 agents/system.md

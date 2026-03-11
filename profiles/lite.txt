@@ -1,5 +1,4 @@
 agents/orchestrator.md
-agents/manager.md
 agents/specialist.md
 agents/system.md
 skills/opencode-integration

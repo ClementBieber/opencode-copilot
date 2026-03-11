@@ -49,7 +49,6 @@ If blocked on missing user input, return a structured blocked result. See `docs/
 
 If a subagent returns `Status: BLOCKED`, the parent should translate that into the appropriate next action:
 - Orchestrator → ask the user via the `question` tool
-- Manager → return the blocked state upward
 - Other subagents → return the blocked state upward
 
 ## Detailed Standards

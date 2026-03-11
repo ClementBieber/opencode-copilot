@@ -25,6 +25,7 @@ The Orchestrator delegates to you when a user wants to:
 - Create a new slash command
 - Update an existing slash command
 - Add or revise supporting agents, skills, or deployment entries for a command
+- Refine command-routing architecture or default command ownership rules
 
 ## Scope: Global vs. Project-Local
 
@@ -54,6 +55,13 @@ If the user doesn't specify scope, determine it from context or ask.
 7. If global: check that the deployment profile (`~/opencode-copilot/profiles/`) includes any new files, and remind the user to redeploy if needed
 8. Verify the resulting configuration is internally consistent
 9. Report what changed, why, and any follow-up steps
+
+## Command Routing Policy
+
+- Treat the Orchestrator as the default command handler for general-purpose commands.
+- Preserve commands rooted to another primary agent when they are intentionally specialized by design.
+- When creating a new command and no other dedicated primary agent is clearly the right owner, route it to `orchestrator`.
+- When updating command architecture, prefer explicit command ownership over ambiguous shared behavior.
 
 ## Guidelines
 

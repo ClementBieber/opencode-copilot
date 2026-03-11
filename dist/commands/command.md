@@ -5,6 +5,8 @@ agent: orchestrator
 
 Create or update OpenCode slash commands. Works from any working directory.
 
+Default routing rule: general-purpose commands should route to `orchestrator` unless another primary agent is intentionally the better long-term owner.
+
 Commands, agents, and skills can live in two locations:
 - **Global (system):** `~/.config/opencode/` — available in every OpenCode session
 - **Project-local:** `.opencode/` in a project root — scoped to that project
@@ -25,3 +27,9 @@ The opencode-copilot repo (`~/opencode-copilot/dist/`) is the source of truth fo
    - avoid duplicating existing commands when an update is cleaner
    - verify internal consistency and summarize the changed files
 4. Return a concise implementation summary to the user, including any follow-up actions.
+
+## Routing Guidance
+
+- Use `agent: orchestrator` for commands that should enter the default general command-handling flow.
+- Keep a command on another primary agent when that command is intentionally specialized, such as research-first workflows owned by `researcher`.
+- Do not route a command through Orchestrator just for uniformity when a dedicated primary-agent owner is clearer.

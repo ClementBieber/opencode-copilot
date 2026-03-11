@@ -1,6 +1,6 @@
 # OpenCode Copilot
 
-Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. Agents coordinate development tasks through a delegation hierarchy and are deployed globally via symlinks.
+Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. Agents coordinate development tasks through a delegation architecture and are deployed globally via symlinks.
 
 ## Quick Start
 
@@ -30,6 +30,8 @@ Deploy creates individual file/directory symlinks from `dist/` into `~/.config/o
 ## Agent Hierarchy
 
 See `AGENTS.md` for the current project overview and `dist/agents/*.md` for canonical agent behavior.
+
+The Orchestrator is the hidden default handler for general commands and interactive coordination. Specialized primary agents, such as `researcher`, can still own their own commands directly when that is intentional by design.
 
 ## Refreshing System Context
 
