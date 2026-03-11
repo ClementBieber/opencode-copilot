@@ -86,6 +86,14 @@ Last Updated: 2026-03-11
 ## In Progress
 
 - 🔄 Push commits to GitHub (needs SSH agent or HTTPS+PAT — 11+ commits pending)
+- 🔄 Roll out canonical delegation protocol across delegating agents
+  - Audit parent/subagent prompts against `dist/skills/delegation-protocol/docs/delegation-spec.md`
+  - Standardize blocked-state and result-contract handling for delegating subagents
+  - Document protocol scope boundary vs. user-facing presentation flavor
+- 🔄 Define Phase 1 presentation-flavor model
+  - Create canonical spec for presets backed by dimensions in `docs/presentation-flavor-spec.md`
+  - Lock primary-agent-only scope and delegation boundary
+  - Fix initial presets: `concise` (default), `teaching`, `technical`
 
 ## Backlog
 
@@ -93,3 +101,7 @@ Last Updated: 2026-03-11
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)
 - Create a `@git` agent that specializes in Git-related operations
+- Apply delegation protocol consistently to delegating agent prompts and verify parent integration behavior (see `docs/delegation-protocol-rollout-report.md`)
+- Define Phase 2 default `concise` formatting contract for primary agents
+- Define Phase 3 preset behavior for `teaching` and `technical`
+- Integrate shared presentation flavor into primary-agent prompts after protocol rollout

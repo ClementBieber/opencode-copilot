@@ -1,6 +1,30 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "build": {
+      "model": "github-copilot/gpt-5.4"
+    },
+    "plan": {
+      "model": "github-copilot/gpt-5.4"
+    }
+  },
   "compaction": {
     "auto": true
+  },
+  "mcp": {
+    "zotero": {
+      "type": "local",
+      "command": [
+        "zotero-mcp",
+        "serve",
+        "--transport",
+        "stdio"
+      ],
+      "environment": {
+        "ZOTERO_LOCAL": "true"
+      },
+      "enabled": true,
+      "timeout": 30000
+    }
   }
 }
