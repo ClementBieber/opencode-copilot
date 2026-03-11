@@ -51,7 +51,7 @@ For the full profile:
 ./scripts/deploy.sh --profile full
 ```
 
-Deployment creates symlinks from `dist/` into `~/.config/opencode/` and records what was deployed in `~/.config/opencode/.opencode-copilot-deployed`.
+Deployment creates symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` -> `~/.config/opencode/opencode.json`, and records what was deployed in `~/.config/opencode/.opencode-copilot-deployed`.
 
 ## 6. Verify Deployment
 

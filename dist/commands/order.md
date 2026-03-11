@@ -28,7 +28,7 @@ Analyze the current project root directory structure and determine if reorganiza
 ## Rules
 
 - Never move .git/, dist/, scripts/, src/, archive/, node_modules/, or logs/ directories
-- Never move opencode.json or .gitignore
+- Never move `dist/opencode.json` or `.gitignore`
 - Always ask for approval before moving files
 - Update any markdown cross-references after moving files
 - Provide a clear before/after summary

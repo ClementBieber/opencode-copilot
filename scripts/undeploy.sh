@@ -58,6 +58,20 @@ else
             fi
         done
     done
+
+    if [ -L "$CONFIG_DIR/opencode.json" ]; then
+        raw_target="$(readlink "$CONFIG_DIR/opencode.json")"
+        case "$raw_target" in
+            /*) target_path="$raw_target" ;;
+            *) target_path="$CONFIG_DIR/$raw_target" ;;
+        esac
+        target="$(readlink -m "$target_path")"
+        case "$target" in
+            "$DIST_DIR"/*)
+                items_to_remove+=("opencode.json")
+                ;;
+        esac
+    fi
 fi
 
 removed=0

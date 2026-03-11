@@ -16,4 +16,6 @@ cd opencode-copilot
 ./scripts/deploy.sh
 ```
 
+This deploys symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` as the global base config.
+
 If you need installation, troubleshooting, verification, or uninstall details, use the canonical publication docs above.

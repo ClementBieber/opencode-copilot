@@ -74,8 +74,9 @@ skipped_count=0
 error_count=0
 pruned_count=0
 declared_items=()
-config_installed=0
+config_linked=0
 config_skipped=0
+config_recorded=0
 
 # Read profile file
 while IFS= read -r line || [ -n "$line" ]; do
@@ -173,17 +174,32 @@ for cat in "${SUBDIRS[@]}"; do
     done
 done
 
-BASE_CONFIG="$PROJECT_DIR/opencode.json"
+BASE_CONFIG="$DIST_DIR/opencode.json"
 TARGET_CONFIG="$CONFIG_DIR/opencode.json"
 
 if [ -f "$BASE_CONFIG" ]; then
-    if [ -e "$TARGET_CONFIG" ]; then
-        echo "  OK:     opencode.json -> already exists, not overwriting"
-        config_skipped=1
+    expected_target="$(readlink -f "$BASE_CONFIG")"
+    if [ -L "$TARGET_CONFIG" ]; then
+        existing_target="$(readlink -f "$TARGET_CONFIG")"
+        if [ "$existing_target" = "$expected_target" ]; then
+            echo "  OK:     opencode.json -> already linked"
+            config_skipped=1
+            config_recorded=1
+        else
+            rm "$TARGET_CONFIG"
+            ln -s "$BASE_CONFIG" "$TARGET_CONFIG"
+            echo "  RELINK: opencode.json -> $BASE_CONFIG"
+            config_linked=1
+            config_recorded=1
+        fi
+    elif [ -e "$TARGET_CONFIG" ]; then
+        echo "  ERROR:  $TARGET_CONFIG exists and is not a symlink. Skipping."
+        error_count=$((error_count+1))
     else
-        cp "$BASE_CONFIG" "$TARGET_CONFIG"
-        echo "  COPY:   opencode.json -> $TARGET_CONFIG"
-        config_installed=1
+        ln -s "$BASE_CONFIG" "$TARGET_CONFIG"
+        echo "  LINK:   opencode.json -> $BASE_CONFIG"
+        config_linked=1
+        config_recorded=1
     fi
 fi
 
@@ -194,8 +210,11 @@ RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
     echo "# Profile: $PROFILE_NAME"
     echo "# Source: $DIST_DIR"
     echo "# Date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-    echo "# BaseConfigInstalled: $config_installed"
+    echo "# BaseConfigLinked: $config_linked"
     echo "# BaseConfigSkipped: $config_skipped"
+    if [ "$config_recorded" -eq 1 ]; then
+        echo "opencode.json"
+    fi
     for it in "${declared_items[@]}"; do
         echo "$it"
     done

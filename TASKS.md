@@ -81,6 +81,7 @@ Last Updated: 2026-03-11
   - Upstream fix: PR #14772 (not yet merged in OpenCode v1.2.21)
 - ✅ Added `/command` command and command-management subagent for interactive command creation/update flows
 - ✅ Removed deprecated coordination subagent and repositioned Orchestrator as hidden default command handler
+- ✅ Moved base `opencode.json` into `dist/` and updated symlink deployment/docs
 
 ## In Progress
 
@@ -91,5 +92,4 @@ Last Updated: 2026-03-11
 - Build OpenCode from source with PR #14772 fix if prefill error persists (strips trailing assistant messages for Claude 4.6)
 - System operations: install pip3/pipx/gh (needs sudo)
 - Import legacy session archives into OpenCode DB (optional)
-- Move opencode.json into project repo with symlink deployment
 - Create a `@git` agent that specializes in Git-related operations

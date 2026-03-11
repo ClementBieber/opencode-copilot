@@ -25,7 +25,7 @@ For published-project installation and operator guidance, see `INSTRUCTIONS.md` 
 ./scripts/undeploy.sh              # remove all deployed symlinks
 ```
 
-Deploy creates individual file/directory symlinks from `dist/` into `~/.config/opencode/`. A deployment record at `~/.config/opencode/.opencode-copilot-deployed` tracks what was deployed for clean removal.
+Deploy creates individual file/directory symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` -> `~/.config/opencode/opencode.json`. A deployment record at `~/.config/opencode/.opencode-copilot-deployed` tracks what was deployed for clean removal.
 
 ## Agent Hierarchy
 
@@ -47,6 +47,7 @@ This updates only the `## Known Environment` section in `dist/agents/system.md` 
 
 ```
 dist/                    # Source of truth — deployed via symlinks
+  opencode.json          # Base OpenCode config deployed globally
   agents/                # Agent definitions (YAML frontmatter + markdown)
   skills/                # Skill definitions (on-demand knowledge)
   commands/              # Custom slash commands

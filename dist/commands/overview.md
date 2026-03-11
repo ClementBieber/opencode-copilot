@@ -15,7 +15,7 @@ Delegate to the specialist subagent with the following instructions:
 4. Read `TASKS.md` if it exists, for current work state
 5. Identify the tech stack from manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.)
 6. Look for test setup (test directories, test configs, CI files)
-7. Check for OpenCode configuration in `.opencode/` or `opencode.json` (if present)
+7. Check for OpenCode configuration in `.opencode/`, `opencode.json`, or `dist/opencode.json` (if present)
 
 Present results as a structured overview covering (omit sections that don't apply):
 - **Project Summary** — what this project is, based on AGENTS.md, README, or inferred from structure
@@ -23,4 +23,4 @@ Present results as a structured overview covering (omit sections that don't appl
 - **File Structure** — key files and directories with their purposes
 - **Work State** — items from TASKS.md (if it exists)
 - **Test & CI** — test framework, test directories, CI configuration
-- **OpenCode Config** — agents, skills, commands, plugins (only if `.opencode/` or `opencode.json` exists)
+- **OpenCode Config** — agents, skills, commands, plugins (only if `.opencode/`, `opencode.json`, or `dist/opencode.json` exists)
