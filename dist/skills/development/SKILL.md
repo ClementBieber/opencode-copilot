@@ -47,6 +47,7 @@ See `docs/testing-strategy.md` for detailed testing procedures.
 - Commit message format: concise description of the "why", not the "what"
 - Never commit secrets, credentials, or environment files
 - Use `.gitignore` to exclude generated files, secrets, and editor configs
+- If `git push` fails over SSH but `gh auth status` shows a valid GitHub login, prefer `gh`-backed HTTPS auth over changing repo config; for example: `git -c credential.helper='!gh auth git-credential' push https://github.com/<owner>/<repo>.git HEAD:<branch>`
 
 ## Code Quality
 

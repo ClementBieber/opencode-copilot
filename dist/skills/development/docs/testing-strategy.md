@@ -43,6 +43,7 @@
 ## Smoke Test Checklist
 
 - [ ] `scripts/deploy.sh` runs without errors
+- [ ] If GitHub push over SSH fails but `gh auth status` is healthy, verify `gh`-backed HTTPS push works without changing the remote
 - [ ] Orchestrator is hidden from the agent picker
 - [ ] Researcher appears as an intentional visible primary agent when full profile is deployed
 - [ ] Specialist and System appear as subagents (@ menu)
