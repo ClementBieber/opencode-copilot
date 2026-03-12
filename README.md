@@ -1,68 +1,57 @@
 # OpenCode Copilot
 
-Multi-agent orchestration system built on [OpenCode](https://opencode.ai)'s native configuration. Agents coordinate development tasks through a delegation architecture and are deployed globally via symlinks.
+OpenCode Copilot is a multi-agent configuration for [OpenCode](https://opencode.ai). The repo treats `dist/` as the source of truth, then deploys those agents, skills, commands, plugins, and the base `opencode.json` into `~/.config/opencode/` via symlinks.
 
 ## Quick Start
 
 ```bash
-git clone <repo-url>
-./scripts/deploy.sh                # deploys lite profile (default)
-# Open OpenCode in any project — agents are available immediately
+git clone <REPO_URL> opencode-copilot
+cd opencode-copilot
+./scripts/deploy.sh
+# Open OpenCode in any project - agents are available immediately
 ```
 
-For published-project installation and operator guidance, see `INSTRUCTIONS.md` and `dist/skills/publication/docs/`.
+For installation, troubleshooting, and operator guidance, see `INSTRUCTIONS.md` and `dist/skills/publication/docs/`.
 
-## Deployment Profiles
-
-| Profile | Items | Description |
-|---------|-------|-------------|
-| `lite` (default) | 12 | Core agents, skills, commands, plugin |
-| `full` | 23 | Everything in lite + research, delegation, publication extras |
+## Deployment Model
 
 ```bash
-./scripts/deploy.sh                # lite profile (default)
-./scripts/deploy.sh --profile full # full profile with extras
-./scripts/undeploy.sh              # remove all deployed symlinks
+./scripts/deploy.sh
+./scripts/undeploy.sh
 ```
 
-Deploy creates individual file/directory symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` -> `~/.config/opencode/opencode.json`. A deployment record at `~/.config/opencode/.opencode-copilot-deployed` tracks what was deployed for clean removal.
+`./scripts/deploy.sh` links the canonical files from `dist/` into `~/.config/opencode/` item by item. That includes `dist/opencode.json` -> `~/.config/opencode/opencode.json` plus the currently declared agents, skills, commands, and plugins.
 
-## Agent Hierarchy
+Each deployment writes `~/.config/opencode/.opencode-copilot-deployed`, which `./scripts/undeploy.sh` uses for clean removal.
 
-See `AGENTS.md` for the current project overview and `dist/agents/*.md` for canonical agent behavior.
+## Architecture
 
-The Orchestrator is the hidden default handler for general commands and interactive coordination. Specialized primary agents, such as `researcher`, can still own their own commands directly when that is intentional by design.
+See `AGENTS.md` for the high-level project map and `dist/agents/*.md` for canonical agent behavior.
+
+Today the hidden `orchestrator` acts as the default general handler, while focused agents such as `researcher` remain available for domain-specific flows.
 
 ## Refreshing System Context
 
-When you move this repo to a different machine or materially change the local environment, refresh the System agent's observed environment block before redeploying:
+If you move the repo to a different machine or the local environment changes materially, refresh the observed host block before redeploying:
 
 ```bash
 ./scripts/update-system-agent.sh
 ```
 
-This updates only the `## Known Environment` section in `dist/agents/system.md` so `@system` stays informed while the other agents remain system-agnostic.
+That script updates only the `## Known Environment` section in `dist/agents/system.md` so `@system` stays current without making the rest of the agent set host-specific.
 
-## Project Structure
+## Repository Layout
 
-```
-dist/                    # Source of truth — deployed via symlinks
-  opencode.json          # Base OpenCode config deployed globally
-  agents/                # Agent definitions (YAML frontmatter + markdown)
-  skills/                # Skill definitions (on-demand knowledge)
-  commands/              # Custom slash commands
-  plugins/               # Plugins (compaction.ts)
-profiles/                # Deployment profiles (lite.txt, full.txt)
-scripts/                 # deploy.sh / undeploy.sh
-AGENTS.md                # Minimal architecture overview
-TASKS.md                 # Active work items
+```text
+dist/      # canonical OpenCode config content deployed by symlink
+scripts/   # deploy, undeploy, and maintenance helpers
+docs/      # supporting design and contract docs
+AGENTS.md  # compact architecture overview
+TASKS.md   # active planning and work log
 ```
 
-## Skills and Commands
+## Canonical Docs
 
-Canonical skill knowledge lives in `dist/skills/*/SKILL.md`.
-Canonical command behavior lives in `dist/commands/*.md`.
-
-## Design Principles
-
-See `dist/skills/project-architecture/SKILL.md` for canonical architecture principles (unicity, context efficiency, delegation).
+`dist/skills/*/SKILL.md` contains canonical skill instructions.
+`dist/commands/*.md` contains canonical slash-command behavior.
+`dist/skills/project-architecture/SKILL.md` defines the core architecture principles.
