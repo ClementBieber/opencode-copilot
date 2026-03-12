@@ -20,10 +20,10 @@ The opencode-copilot repo (`~/opencode-copilot/dist/`) is the source of truth fo
 3. Delegate to the `command` subagent using the Task tool. Include the user's request verbatim and the current working directory. Instruct the subagent to:
    - load `opencode-integration` before editing OpenCode config files
    - determine scope: **global** (edit files under `~/opencode-copilot/dist/` + redeploy) or **project-local** (edit `.opencode/` in the current project) — ask the user if ambiguous
-   - for global commands, inspect `~/opencode-copilot/dist/commands/`, `dist/agents/`, `dist/skills/`, `profiles/`, `TASKS.md`, and `AGENTS.md` as needed
+   - for global commands, inspect `~/opencode-copilot/dist/commands/`, `dist/agents/`, `dist/skills/`, `scripts/deploy.sh`, `TASKS.md`, and `AGENTS.md` as needed
    - for project-local commands, inspect `.opencode/commands/`, `.opencode/agents/`, `.opencode/skills/` in the current project
    - verify understanding before editing, using the `question` tool for focused assignment-shaping questions when needed
-   - implement the requested command end-to-end, including supporting agents, skills, and deployment profile updates when appropriate
+   - implement the requested command end-to-end, including supporting agents, skills, and deploy script updates when appropriate
    - avoid duplicating existing commands when an update is cleaner
    - verify internal consistency and summarize the changed files
 4. Return a concise implementation summary to the user, including any follow-up actions.

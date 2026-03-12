@@ -45,11 +45,7 @@ Verify that `~/.config/opencode/node_modules/@opencode-ai/plugin` exists.
 ./scripts/deploy.sh
 ```
 
-For the full profile:
-
-```bash
-./scripts/deploy.sh --profile full
-```
+This deploys the canonical published configuration.
 
 Deployment creates symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` -> `~/.config/opencode/opencode.json`, and records what was deployed in `~/.config/opencode/.opencode-copilot-deployed`.
 
@@ -63,7 +59,7 @@ opencode
 ```
 
 Check that:
-1. the primary agent is available
+1. the primary agents are available
 2. subagents are accessible
 3. commands such as `/overview` work
 4. skills load on demand

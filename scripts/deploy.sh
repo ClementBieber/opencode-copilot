@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # deploy.sh - Create symlinks from ~/.config/opencode/ to dist/ files and dirs
-# Supports profile-based deployments (profiles/*.txt)
 
 set -euo pipefail
 
@@ -9,49 +8,67 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 DIST_DIR="$PROJECT_DIR/dist"
 CONFIG_DIR="$HOME/.config/opencode"
 
-PROFILE_NAME="lite"
-
-# Parse args
-while [ "$#" -gt 0 ]; do
+if [ "$#" -gt 0 ]; then
     case "$1" in
-        --profile)
-            shift
-            if [ "$#" -eq 0 ]; then
-                echo "Usage: $0 [--profile <name>]" >&2
-                exit 2
-            fi
-            PROFILE_NAME="$1"
-            shift
-            ;;
         -h|--help)
-            echo "Usage: $0 [--profile <name>]" >&2
+            echo "Usage: $0" >&2
             exit 0
             ;;
         *)
             echo "Unknown arg: $1" >&2
-            echo "Usage: $0 [--profile <name>]" >&2
+            echo "Usage: $0" >&2
             exit 2
             ;;
     esac
-done
+fi
 
-PROFILE_FILE="$PROJECT_DIR/profiles/${PROFILE_NAME}.txt"
-
-echo "Deploying OpenCode Copilot configs (profile: $PROFILE_NAME)..."
+echo "Deploying OpenCode Copilot configs..."
 echo "  Source: $DIST_DIR"
 echo "  Target: $CONFIG_DIR"
-echo "  Profile: $PROFILE_FILE"
 echo ""
-
-if [ ! -f "$PROFILE_FILE" ]; then
-    echo "ERROR: profile file not found: $PROFILE_FILE" >&2
-    exit 1
-fi
 
 mkdir -p "$CONFIG_DIR"
 
 # Categories
 SUBDIRS=("agents" "skills" "commands" "plugins")
+
+# Canonical deployed items.
+# When adding a new globally deployed file or directory under dist/, add it here.
+declared_items=(
+    "agents/orchestrator.md"
+    "agents/command.md"
+    "agents/specialist.md"
+    "agents/system.md"
+    "agents/researcher.md"
+    "agents/explore.md"
+    "agents/general.md"
+    "agents/compaction.md"
+    "agents/summary.md"
+    "agents/research-synthesizer.md"
+    "agents/taskmaster.md"
+    "skills/opencode-integration"
+    "skills/development"
+    "skills/task-management"
+    "skills/project-architecture"
+    "skills/last30days"
+    "skills/research"
+    "skills/delegation-protocol"
+    "skills/publication"
+    "skills/session-index"
+    "skills/cost-aware-llm-pipeline"
+    "skills/autonomous-loops"
+    "skills/continuous-learning"
+    "skills/mailing"
+    "commands/init.md"
+    "commands/command.md"
+    "commands/overview.md"
+    "commands/last30.md"
+    "commands/mail.md"
+    "commands/order.md"
+    "commands/task.md"
+    "commands/litterature.md"
+    "plugins/compaction.ts"
+)
 
 # Migrate old-style top-level symlinks (e.g., ~/.config/opencode/agents -> dist/agents)
 for cat in "${SUBDIRS[@]}"; do
@@ -73,29 +90,17 @@ deployed_count=0
 skipped_count=0
 error_count=0
 pruned_count=0
-declared_items=()
 config_linked=0
 config_skipped=0
 config_recorded=0
 
-# Read profile file
-while IFS= read -r line || [ -n "$line" ]; do
-    # Trim leading/trailing whitespace
-    entry="$line"
-    entry="$(echo "$entry" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-    # Skip blank and comment lines
-    case "$entry" in
-        ''|\#*)
-            continue
-            ;;
-    esac
-    declared_items+=("$entry")
-
+# Deploy canonical item list
+for entry in "${declared_items[@]}"; do
     source_path="$DIST_DIR/$entry"
     target_path="$CONFIG_DIR/$entry"
 
     # Ensure parent dir exists
-mkdir -p "$(dirname "$target_path")"
+    mkdir -p "$(dirname "$target_path")"
 
     if [ ! -e "$source_path" ] && [ ! -d "$source_path" ]; then
         echo "  MISSING: $entry -> $source_path (source does not exist). Skipping"
@@ -131,7 +136,7 @@ mkdir -p "$(dirname "$target_path")"
     ln -s "$source_path" "$target_path"
     echo "  LINK:   $entry -> $source_path"
     deployed_count=$((deployed_count+1))
-done < "$PROFILE_FILE"
+done
 
 # Prune stale symlinks from previous deployments that are no longer declared.
 for cat in "${SUBDIRS[@]}"; do
@@ -207,7 +212,6 @@ fi
 RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
 {
     echo "# OpenCode Copilot deployment record"
-    echo "# Profile: $PROFILE_NAME"
     echo "# Source: $DIST_DIR"
     echo "# Date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
     echo "# BaseConfigLinked: $config_linked"

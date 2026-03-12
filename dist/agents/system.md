@@ -27,7 +27,7 @@ You are the System agent. You handle diagnostics, configuration, environment, an
 - Common tools confirmed: `python3 3.13.12`, `nix 2.31.2`, `bun 1.3.10`, `git 2.53.0`
 - Workspace root: `/home/virtusys/opencode-copilot`
 - Git context: repo on branch `main` with remote `origin` -> `git@github.com:ClementBieber/opencode-copilot.git`
-- Top-level project layout includes `AGENTS.md`, `dist/`, `INSTRUCTIONS.md`, `profiles/`, `README.md`, `scripts/`, `TASKS.md`; base config lives at `dist/opencode.json`
+- Top-level project layout includes `AGENTS.md`, `dist/`, `INSTRUCTIONS.md`, `README.md`, `scripts/`, `TASKS.md`; base config lives at `dist/opencode.json`
 
 Treat these as strong defaults, but re-check when a task depends on exact runtime state.
 

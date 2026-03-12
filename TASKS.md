@@ -1,6 +1,6 @@
 # Active Tasks & Work Items
 
-Last Updated: 2026-03-11
+Last Updated: 2026-03-12
 
 ---
 
@@ -20,11 +20,11 @@ Last Updated: 2026-03-11
 - ✅ Development skill rewritten as generic dev knowledge
 - ✅ INSTRUCTIONS.md cleaned (no Python/yt-dlp, plugin version "latest")
 - ✅ Old ~/oc-system-project/ deleted
-- ✅ Profile-based deployment system (lite/full profiles, deploy.sh, undeploy.sh)
+- ✅ Deployment system created (deploy.sh, undeploy.sh)
 - ✅ Pushed initial commit to GitHub (ClementBieber/opencode-copilot)
-- ✅ Documentation updates for profile system (README.md, INSTRUCTIONS.md)
+- ✅ Documentation updates for deployment system (README.md, INSTRUCTIONS.md)
 - ✅ Last30days extras created (research-synthesizer agent, last30days skill, /last30 command)
-- ✅ Full profile deployed and verified (17/17 items)
+- ✅ Full deployment set deployed and verified (17/17 items at the time)
 - ✅ Researcher primary agent created with BCI domain knowledge, output templates, and enhanced archive system
 - ✅ Orchestrator model changed to claude-opus-4.6
 - ✅ Orchestrator loop hardened (strict ACT/QUESTION/STOP contract, steps: 12, Question Rules)
@@ -50,7 +50,7 @@ Last Updated: 2026-03-11
 - ✅ /overview command reordered (general analysis first, OpenCode config last)
 - ✅ PATH duplicates cleaned in ~/.bashrc
 - ✅ explore.md and general.md agents created (override built-in agents to use gpt-5-mini)
-- ✅ profiles/full.txt updated with explore.md and general.md
+- ✅ Deployment manifest updated with explore.md and general.md
 - ✅ AGENTS.md architecture diagram updated with explore/general agents
 - ✅ compaction.md and summary.md agents created (override built-in agents to use gpt-5-mini)
 - ✅ Full duplication audit completed — 3 critical + 4 moderate duplications found and fixed:
@@ -59,12 +59,12 @@ Last Updated: 2026-03-11
   - Verify-your-work checklist deduplicated (specialist.md → development skill)
   - AGENTS.md line-count conflict resolved (standardized to 25 lines)
   - Compaction plugin recovery text slimmed (session-index docs = canonical)
-- ✅ Full profile now at 24 deployed items (10 agents, 9 skills, 4 commands, 1 plugin)
+- ✅ Deployment set expanded to 24 deployed items (10 agents, 9 skills, 4 commands, 1 plugin)
 - ✅ ECC skill extraction completed — 3 new skills created and deployed:
   - cost-aware-llm-pipeline (model routing, cost tracking, budget controls, prompt caching, retry policy)
   - autonomous-loops (loop patterns, exit conditions, state persistence, safety)
   - continuous-learning (session pattern extraction, confidence model, privacy, curation)
-- ✅ Full profile now at 27 deployed items (10 agents, 12 skills, 4 commands, 1 plugin)
+- ✅ Deployment set expanded to 27 deployed items (10 agents, 12 skills, 4 commands, 1 plugin)
 - ✅ Three ECC skill updates for OpenCode integration:
   - session-querying.md: removed redundant Option B, acknowledged native SQLite DB at ~/.local/share/opencode/opencode.db
   - continuous-learning implementation-guide: added OpenCode session DB as data source (schema, hook points, query pipeline)
@@ -72,9 +72,9 @@ Last Updated: 2026-03-11
 - ✅ Fixed markdown formatting in all 6 ECC skill files (underline-style headers → ATX ## style)
 - ✅ Architecture refactor: all subagents upgraded to claude-opus-4.6, orchestrator slimmed to thin router
   - Deleted built-in agent overrides (explore, general, compaction, summary) — they inherit caller's model
-  - Profile reduced from 27 to 23 items (6 agents, 12 skills, 4 commands, 1 plugin)
+  - Deployment set reduced from 27 to 23 items (6 agents, 12 skills, 4 commands, 1 plugin)
   - Merged feature/opus-subagents → main
-- ✅ README.md profile counts fixed (17 → 23)
+- ✅ README.md deployed-item count fixed (17 → 23)
 - ✅ Investigated and mitigated "assistant message prefill" error:
   - Root cause: OpenCode appends assistant-role message at max steps; Claude 4.6 rejects prefill
   - Fix: increased orchestrator steps from 12 → 100
@@ -94,6 +94,10 @@ Last Updated: 2026-03-11
   - Create canonical spec for presets backed by dimensions in `docs/presentation-flavor-spec.md`
   - Lock primary-agent-only scope and delegation boundary
   - Fix initial presets: `concise` (default), `teaching`, `technical`
+- 🔄 Define Phase 2 default `concise` formatting contract for primary agents
+  - Create canonical contract in `docs/concise-presentation-contract.md`
+  - Keep high information density without reducing technical precision
+  - Lock tested rules for headers, emphasis, ambiguity handling, and report behavior
 
 ## Backlog
 
@@ -102,6 +106,5 @@ Last Updated: 2026-03-11
 - Import legacy session archives into OpenCode DB (optional)
 - Create a `@git` agent that specializes in Git-related operations
 - Apply delegation protocol consistently to delegating agent prompts and verify parent integration behavior (see `docs/delegation-protocol-rollout-report.md`)
-- Define Phase 2 default `concise` formatting contract for primary agents
 - Define Phase 3 preset behavior for `teaching` and `technical`
 - Integrate shared presentation flavor into primary-agent prompts after protocol rollout

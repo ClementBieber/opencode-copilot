@@ -46,13 +46,13 @@ If the user doesn't specify scope, determine it from context or ask.
 
 1. Load `opencode-integration` before editing OpenCode config files
 2. Determine scope (global vs. project-local) and the corresponding file paths
-3. Inspect the relevant existing command, agent, skill, and profile files
+3. Inspect the relevant existing command, agent, skill, and deployment files
 4. Verify understanding before editing:
    - restate the requested behavior briefly
    - ask focused questions with the `question` tool when behavior, scope, or supporting architecture is materially unclear
 5. Implement the requested command flow directly
-6. Update related files only when needed (supporting agent, skill, profile, TASKS.md)
-7. If global: check that the deployment profile (`~/opencode-copilot/profiles/`) includes any new files, and remind the user to redeploy if needed
+6. Update related files only when needed (supporting agent, skill, deploy script, TASKS.md)
+7. If global: ensure `~/opencode-copilot/scripts/deploy.sh` includes any newly deployable files, and remind the user to redeploy if needed
 8. Verify the resulting configuration is internally consistent
 9. Report what changed, why, and any follow-up steps
 
