@@ -43,6 +43,7 @@
 ## Smoke Test Checklist
 
 - [ ] `scripts/deploy.sh` runs without errors
+- [ ] `scripts/deploy.sh --verbose` shows per-item deployment details when needed
 - [ ] If GitHub push over SSH fails but `gh auth status` is healthy, verify `gh`-backed HTTPS push works without changing the remote
 - [ ] Orchestrator is hidden from the agent picker
 - [ ] Researcher appears as an intentional visible primary agent

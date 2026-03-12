@@ -47,6 +47,8 @@ Verify that `~/.config/opencode/node_modules/@opencode-ai/plugin` exists.
 
 This deploys the canonical published configuration.
 
+By default the script prints a concise summary. Use `./scripts/deploy.sh --verbose` to show per-item deployment details.
+
 Deployment creates symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` -> `~/.config/opencode/opencode.json`, and records what was deployed in `~/.config/opencode/.opencode-copilot-deployed`.
 
 ## 6. Verify Deployment
@@ -68,6 +70,7 @@ Check that:
 
 | Issue | Solution |
 |-------|----------|
+| Need full deployment detail output | Run `./scripts/deploy.sh --verbose` |
 | Plugin errors on startup | Run `npm install --prefix ~/.config/opencode` |
 | `deploy.sh` refuses to link | Back up conflicting files, then retry |
 | Agent not appearing | Restart OpenCode |

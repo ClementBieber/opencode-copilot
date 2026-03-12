@@ -18,4 +18,6 @@ cd opencode-copilot
 
 This deploys the canonical OpenCode Copilot config, creating symlinks from `dist/` into `~/.config/opencode/`, including `dist/opencode.json` as the global base config.
 
+Use `./scripts/deploy.sh --verbose` if you want the per-item link report.
+
 If you need installation, troubleshooting, verification, or uninstall details, use the canonical publication docs above.

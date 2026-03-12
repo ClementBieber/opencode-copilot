@@ -17,10 +17,13 @@ For installation, troubleshooting, and operator guidance, see `INSTRUCTIONS.md` 
 
 ```bash
 ./scripts/deploy.sh
+./scripts/deploy.sh --verbose
 ./scripts/undeploy.sh
 ```
 
 `./scripts/deploy.sh` links the canonical files from `dist/` into `~/.config/opencode/` item by item. That includes `dist/opencode.json` -> `~/.config/opencode/opencode.json` plus the currently declared agents, skills, commands, and plugins.
+
+By default it prints a concise summary. Use `-v` or `--verbose` to show per-item deployment details.
 
 Each deployment writes `~/.config/opencode/.opencode-copilot-deployed`, which `./scripts/undeploy.sh` uses for clean removal.
 

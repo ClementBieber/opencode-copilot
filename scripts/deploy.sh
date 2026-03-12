@@ -7,20 +7,35 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 DIST_DIR="$PROJECT_DIR/dist"
 CONFIG_DIR="$HOME/.config/opencode"
+VERBOSE=0
 
-if [ "$#" -gt 0 ]; then
+usage() {
+    echo "Usage: $0 [-v|--verbose]" >&2
+}
+
+log_detail() {
+    if [ "$VERBOSE" -eq 1 ]; then
+        echo "$1"
+    fi
+}
+
+while [ "$#" -gt 0 ]; do
     case "$1" in
+        -v|--verbose)
+            VERBOSE=1
+            ;;
         -h|--help)
-            echo "Usage: $0" >&2
+            usage
             exit 0
             ;;
         *)
             echo "Unknown arg: $1" >&2
-            echo "Usage: $0" >&2
+            usage
             exit 2
             ;;
     esac
-fi
+    shift
+done
 
 echo "Deploying OpenCode Copilot configs..."
 echo "  Source: $DIST_DIR"
@@ -112,11 +127,11 @@ for entry in "${declared_items[@]}"; do
         existing_target="$(readlink -f "$target_path")"
         expected_target="$(readlink -f "$source_path")"
         if [ "$existing_target" = "$expected_target" ]; then
-            echo "  OK:     $entry -> already linked"
+            log_detail "  OK:     $entry -> already linked"
             skipped_count=$((skipped_count+1))
             continue
         else
-            echo "  RELINK: $entry (was -> $existing_target)"
+            log_detail "  RELINK: $entry (was -> $existing_target)"
             rm "$target_path"
         fi
     elif [ -e "$target_path" ]; then
@@ -124,7 +139,7 @@ for entry in "${declared_items[@]}"; do
         existing_real="$(readlink -f "$target_path")"
         expected_source="$(readlink -f "$source_path")"
         if [ "$existing_real" = "$expected_source" ]; then
-            echo "  OK:     $entry -> already present (via parent symlink)"
+            log_detail "  OK:     $entry -> already present (via parent symlink)"
             skipped_count=$((skipped_count+1))
             continue
         fi
@@ -134,7 +149,7 @@ for entry in "${declared_items[@]}"; do
     fi
 
     ln -s "$source_path" "$target_path"
-    echo "  LINK:   $entry -> $source_path"
+    log_detail "  LINK:   $entry -> $source_path"
     deployed_count=$((deployed_count+1))
 done
 
@@ -173,7 +188,7 @@ for cat in "${SUBDIRS[@]}"; do
 
         if [ "$keep" -eq 0 ]; then
             rm "$entry"
-            echo "  PRUNE:  $rel (stale symlink -> $resolved_target)"
+            log_detail "  PRUNE:  $rel (stale symlink -> $resolved_target)"
             pruned_count=$((pruned_count+1))
         fi
     done
@@ -187,13 +202,13 @@ if [ -f "$BASE_CONFIG" ]; then
     if [ -L "$TARGET_CONFIG" ]; then
         existing_target="$(readlink -f "$TARGET_CONFIG")"
         if [ "$existing_target" = "$expected_target" ]; then
-            echo "  OK:     opencode.json -> already linked"
+            log_detail "  OK:     opencode.json -> already linked"
             config_skipped=1
             config_recorded=1
         else
             rm "$TARGET_CONFIG"
             ln -s "$BASE_CONFIG" "$TARGET_CONFIG"
-            echo "  RELINK: opencode.json -> $BASE_CONFIG"
+            log_detail "  RELINK: opencode.json -> $BASE_CONFIG"
             config_linked=1
             config_recorded=1
         fi
@@ -202,7 +217,7 @@ if [ -f "$BASE_CONFIG" ]; then
         error_count=$((error_count+1))
     else
         ln -s "$BASE_CONFIG" "$TARGET_CONFIG"
-        echo "  LINK:   opencode.json -> $BASE_CONFIG"
+        log_detail "  LINK:   opencode.json -> $BASE_CONFIG"
         config_linked=1
         config_recorded=1
     fi
@@ -226,6 +241,9 @@ RECORD_FILE="$CONFIG_DIR/.opencode-copilot-deployed"
 
 echo ""
 echo "Summary: deployed=$deployed_count skipped=$skipped_count pruned=$pruned_count errors=$error_count"
+if [ "$VERBOSE" -eq 0 ]; then
+    echo "Run with -v or --verbose to show per-item deployment details."
+fi
 echo "Deployment record: $RECORD_FILE"
 echo ""
 echo "Done. Verify with: ls -la $CONFIG_DIR/"
