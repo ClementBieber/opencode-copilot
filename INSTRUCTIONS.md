@@ -11,7 +11,7 @@ Canonical publication and operator guidance lives in:
 Quick start:
 
 ```bash
-git clone <REPO_URL> opencode-copilot
+git clone https://github.com/ClementBieber/opencode-copilot opencode-copilot
 cd opencode-copilot
 ./scripts/deploy.sh
 ```

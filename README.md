@@ -5,7 +5,7 @@ OpenCode Copilot is a multi-agent configuration for [OpenCode](https://opencode.
 ## Quick Start
 
 ```bash
-git clone <REPO_URL> opencode-copilot
+git clone https://github.com/ClementBieber/opencode-copilot opencode-copilot
 cd opencode-copilot
 ./scripts/deploy.sh
 # Open OpenCode in any project - agents are available immediately
